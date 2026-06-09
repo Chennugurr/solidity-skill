@@ -4,7 +4,7 @@
 
 It is intentionally vendor-neutral. The core skills are not tied to any single agent runtime. Product-specific notes live in `adapters/`, while the reusable skills live in `skills/`.
 
-This repository is also packaged as a Codex plugin named `solidity-skill`. Codex-specific plugin metadata lives only in `.codex-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
+This repository is also packaged as both a Codex plugin and a Claude Code plugin named `solidity-skill`. Product-specific plugin metadata lives in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
 
 ## What Is Included
 
@@ -27,6 +27,7 @@ Shared support:
 
 - `shared/`: reusable security, Foundry, OpenZeppelin, and mainnet-readiness references.
 - `.codex-plugin/plugin.json`: Codex plugin manifest that loads the nine skills from `./skills/`.
+- `.claude-plugin/plugin.json`: Claude Code plugin manifest; Claude Code auto-discovers the root `skills/` directory.
 - `adapters/`: notes for using the skill suite with different agent environments.
 - `examples/`: sample prompts and expected usage patterns.
 - `docs/`: design notes and roadmap.
@@ -60,6 +61,16 @@ The plugin manifest is intentionally small:
 - It does not include a CLI, MCP server, app manifest, hooks, icons, screenshots, or marketplace entry.
 
 The public skill entrypoints remain the nine `skills/<skill-name>/SKILL.md` files.
+
+## Claude Code Plugin
+
+The Claude Code plugin manifest is intentionally small:
+
+- It declares the plugin name, display name, version, metadata, and repository.
+- It relies on Claude Code's default root `skills/` discovery.
+- It does not include commands, agents, hooks, MCP servers, LSP servers, monitors, settings, or marketplace files.
+
+After installing or loading it in Claude Code, skills are namespaced under the plugin name, such as `/solidity-skill:solidity-builder`.
 
 ## Skill Philosophy
 

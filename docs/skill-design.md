@@ -75,13 +75,14 @@ The repository keeps related Solidity skills together but independently loadable
 
 Use shared references for common rules. Do not duplicate long safety or Foundry guidance inside each skill.
 
-## Codex Plugin Packaging
+## Plugin Packaging
 
-The repository can be installed as a Codex plugin through `.codex-plugin/plugin.json`.
+The repository can be installed as a Codex plugin through `.codex-plugin/plugin.json` and as a Claude Code plugin through `.claude-plugin/plugin.json`.
 
-The plugin manifest should stay thin:
+Plugin manifests should stay thin:
 
-- `skills` points to `./skills/`.
 - Codex-specific metadata belongs in `.codex-plugin/plugin.json`.
+- Claude-specific metadata belongs in `.claude-plugin/plugin.json`.
+- Claude Code discovers the root `skills/` directory automatically.
 - The Markdown skills should remain reusable by non-Codex agents.
-- Do not add `apps`, `mcpServers`, icons, logos, screenshots, or marketplace files unless those assets or integrations actually exist.
+- Do not add apps, MCP servers, hooks, agents, icons, logos, screenshots, settings, or marketplace files unless those assets or integrations actually exist.
