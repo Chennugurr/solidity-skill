@@ -72,6 +72,16 @@ The Claude Code plugin manifest is intentionally small:
 
 After installing or loading it in Claude Code, skills are namespaced under the plugin name, such as `/solidity-skill:solidity-builder`.
 
+## ChatGPT Skill Uploads
+
+Some skill upload UIs accept one skill at a time as a `.zip` with `SKILL.md` at the zip root. Generate those upload-ready archives with:
+
+```bash
+python3 scripts/package-upload-skills.py
+```
+
+This writes one zip per skill to `dist/`, including bundled shared references under `references/shared/`. For a first upload, use `dist/solidity-builder.zip`.
+
 ## Skill Philosophy
 
 This repository treats skills as compact, reusable operating instructions for AI coding agents. A skill should:
