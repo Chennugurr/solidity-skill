@@ -1,0 +1,23 @@
+# Claude Adapter
+
+Use this adapter when working with a Claude environment that can read project files, knowledge files, or Markdown instructions.
+
+## Recommended Use
+
+1. Choose the skill that matches the task, such as `solidity-builder`, `solidity-auditor`, or `foundry-test-writer`.
+2. Add or attach that skill's `SKILL.md` to the relevant project or conversation context.
+3. Keep the skill's `references/`, `templates/`, and `skills/_shared/references/` available.
+4. Ask Claude to load only the reference files needed for the task.
+
+Example prompt:
+
+```text
+Use the solidity-auditor skill in skills/solidity-auditor/SKILL.md.
+Review these contracts and consult skills/_shared/references/security-posture.md before writing findings.
+```
+
+## Notes
+
+- The core skills are not Claude-specific.
+- Do not paste every reference file into context unless the task needs it.
+- For long-running projects, keep this repository checked into the workspace so references and templates remain available.

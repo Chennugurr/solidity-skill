@@ -1,0 +1,76 @@
+# Skill Design
+
+This repository uses a simple, vendor-neutral skill format:
+
+```text
+skills/
+  _shared/
+    references/
+  skill-name/
+    SKILL.md
+    README.md
+    references/
+    templates/
+```
+
+## Required Frontmatter
+
+Every `SKILL.md` must start with valid YAML frontmatter:
+
+```yaml
+---
+name: skill-name
+description: Clear description of when and why to use the skill.
+---
+```
+
+The `name` should match the folder name.
+
+## Progressive Disclosure
+
+Keep `SKILL.md` short enough to load frequently. Put longer reusable material in `references/` and link to those files from the skill body.
+
+Recommended split:
+
+- `SKILL.md`: when to use the skill, core workflow, defaults, safety posture, output expectations.
+- `references/`: detailed domain rules, checklists, and patterns.
+- `templates/`: source files an agent can copy or adapt.
+- `examples/`: sample prompts and expected behavior.
+- `adapters/`: product-specific usage notes.
+- `skills/_shared/references/`: reusable guidance that applies to more than one skill.
+
+## Vendor Neutrality
+
+Core skills should avoid product names and runtime assumptions. Product-specific instructions belong in `adapters/`.
+
+Acceptable in `SKILL.md`:
+
+- "Load this reference file when needed."
+- "Use Foundry by default for Solidity tests."
+- "State assumptions before writing code."
+
+Avoid in `SKILL.md`:
+
+- References to a single agent vendor.
+- Hardcoded local skill install paths.
+- Instructions that only work in one chat product.
+
+## Security Posture
+
+Solidity skills should assume real funds may depend on generated code. Skills should:
+
+- Prefer established libraries.
+- Avoid hidden controls.
+- Explain trust assumptions.
+- Require tests for access control and accounting.
+- Avoid overclaiming security.
+- Recommend review and audits before mainnet.
+
+## Suite Organization
+
+The repository keeps related Solidity skills together but independently loadable:
+
+- Core: builder, auditor, Foundry test writer, deployment engineer.
+- Advanced: DeFi accounting, Uniswap v4 hooks, upgradeability, token launches, protocol specs.
+
+Use shared references for common rules. Do not duplicate long safety or Foundry guidance inside each skill.
