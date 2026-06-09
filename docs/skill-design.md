@@ -3,9 +3,9 @@
 This repository uses a simple, vendor-neutral skill format:
 
 ```text
+shared/
+  references/
 skills/
-  _shared/
-    references/
   skill-name/
     SKILL.md
     README.md
@@ -37,7 +37,7 @@ Recommended split:
 - `templates/`: source files an agent can copy or adapt.
 - `examples/`: sample prompts and expected behavior.
 - `adapters/`: product-specific usage notes.
-- `skills/_shared/references/`: reusable guidance that applies to more than one skill.
+- `shared/references/`: reusable guidance that applies to more than one skill.
 
 ## Vendor Neutrality
 
@@ -74,3 +74,14 @@ The repository keeps related Solidity skills together but independently loadable
 - Advanced: DeFi accounting, Uniswap v4 hooks, upgradeability, token launches, protocol specs.
 
 Use shared references for common rules. Do not duplicate long safety or Foundry guidance inside each skill.
+
+## Codex Plugin Packaging
+
+The repository can be installed as a Codex plugin through `.codex-plugin/plugin.json`.
+
+The plugin manifest should stay thin:
+
+- `skills` points to `./skills/`.
+- Codex-specific metadata belongs in `.codex-plugin/plugin.json`.
+- The Markdown skills should remain reusable by non-Codex agents.
+- Do not add `apps`, `mcpServers`, icons, logos, screenshots, or marketplace files unless those assets or integrations actually exist.

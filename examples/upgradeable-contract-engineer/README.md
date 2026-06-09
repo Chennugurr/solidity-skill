@@ -7,7 +7,7 @@ Use skills/upgradeable-contract-engineer/SKILL.md.
 
 Review this UUPS upgrade plan.
 Check initializer safety, implementation initialization, storage layout, upgrade authorization, admin trust risk, migration steps, and upgrade tests.
-Consult skills/_shared/references/openzeppelin-defaults.md and skills/upgradeable-contract-engineer/references/storage-initializers.md.
+Consult shared/references/openzeppelin-defaults.md and skills/upgradeable-contract-engineer/references/storage-initializers.md.
 ```
 
 ## Expected Agent Behavior

@@ -12,7 +12,7 @@ Mint 1,000,000 tokens to the deployer at deployment.
 Use OpenZeppelin ERC20.
 Do not include owner functions, taxes, blacklists, pausing, or upgradeability.
 Include unit tests and a deploy script.
-Consult skills/_shared/references/security-posture.md and skills/_shared/references/foundry-conventions.md before writing files.
+Consult shared/references/security-posture.md and shared/references/foundry-conventions.md before writing files.
 ```
 
 ## Expected Agent Behavior

@@ -8,7 +8,7 @@ Provide the agent with:
 
 - The chosen `skills/<skill-name>/SKILL.md`
 - The ability to read that skill's `references/`
-- The ability to read `skills/_shared/references/`
+- The ability to read `shared/references/`
 - The ability to copy or adapt that skill's `templates/`
 
 Example prompt:

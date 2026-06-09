@@ -1,0 +1,39 @@
+{
+  "name": "solidity-skill",
+  "version": "0.1.0",
+  "description": "Vendor-neutral Solidity agent skill suite for building, auditing, testing, deploying, and specifying EVM smart contracts.",
+  "author": {
+    "name": "Chennugurr",
+    "url": "https://github.com/Chennugurr"
+  },
+  "homepage": "https://github.com/Chennugurr/solidity-skill",
+  "repository": "https://github.com/Chennugurr/solidity-skill",
+  "license": "MIT",
+  "keywords": [
+    "solidity",
+    "evm",
+    "smart-contracts",
+    "foundry",
+    "security",
+    "defi"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Solidity Skill",
+    "shortDescription": "Build, audit, test, deploy, and specify Solidity contracts",
+    "longDescription": "A Solidity agent skill suite with nine focused Markdown skills for smart contract building, security review, Foundry testing, EVM deployment, DeFi accounting, Uniswap v4 hooks, upgradeable contracts, token launches, and protocol specifications.",
+    "developerName": "Chennugurr",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Chennugurr/solidity-skill",
+    "defaultPrompt": [
+      "Build a secure Solidity contract with tests",
+      "Audit this smart contract for security issues",
+      "Write Foundry fuzz and invariant tests"
+    ],
+    "brandColor": "#627EEA"
+  }
+}

@@ -13,7 +13,7 @@ Rewards should use index-based accounting, not loops over stakers.
 Claims should be pull-based.
 The owner can notify new rewards only after reward tokens are funded.
 Include Foundry tests for multiple users, staggered deposits, partial withdrawals, reward claiming, and access control.
-Consult skills/_shared/references/security-posture.md, skills/solidity-builder/references/contract-patterns.md, and skills/_shared/references/foundry-conventions.md before writing files.
+Consult shared/references/security-posture.md, skills/solidity-builder/references/contract-patterns.md, and shared/references/foundry-conventions.md before writing files.
 ```
 
 ## Expected Agent Behavior

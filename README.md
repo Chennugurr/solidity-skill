@@ -4,6 +4,8 @@
 
 It is intentionally vendor-neutral. The core skills are not tied to any single agent runtime. Product-specific notes live in `adapters/`, while the reusable skills live in `skills/`.
 
+This repository is also packaged as a Codex plugin named `solidity-skill`. Codex-specific plugin metadata lives only in `.codex-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
+
 ## What Is Included
 
 Core skills:
@@ -23,7 +25,8 @@ Advanced skills:
 
 Shared support:
 
-- `skills/_shared/`: reusable security, Foundry, OpenZeppelin, and mainnet-readiness references.
+- `shared/`: reusable security, Foundry, OpenZeppelin, and mainnet-readiness references.
+- `.codex-plugin/plugin.json`: Codex plugin manifest that loads the nine skills from `./skills/`.
 - `adapters/`: notes for using the skill suite with different agent environments.
 - `examples/`: sample prompts and expected usage patterns.
 - `docs/`: design notes and roadmap.
@@ -33,7 +36,7 @@ Shared support:
 1. Clone or copy this repository.
 2. Pick the skill that matches the job.
 3. Point your agent to that skill's `SKILL.md`.
-4. When a task needs deeper details, have the agent load the relevant files in that skill's `references/` and `skills/_shared/references/`.
+4. When a task needs deeper details, have the agent load the relevant files in that skill's `references/` and `shared/references/`.
 5. Use files in `templates/` as starting points when concrete artifacts are requested.
 
 Example prompt:
@@ -47,6 +50,16 @@ Skill handoff example:
 ```text
 Use protocol-spec-writer to turn this idea into a spec, solidity-builder to implement it, foundry-test-writer to test it, solidity-auditor to review it, and evm-deployment-engineer to prepare deployment.
 ```
+
+## Codex Plugin
+
+The plugin manifest is intentionally small:
+
+- It declares the plugin name, version, metadata, and UI copy.
+- It points Codex at `./skills/`.
+- It does not include a CLI, MCP server, app manifest, hooks, icons, screenshots, or marketplace entry.
+
+The public skill entrypoints remain the nine `skills/<skill-name>/SKILL.md` files.
 
 ## Skill Philosophy
 

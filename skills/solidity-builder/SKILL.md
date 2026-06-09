@@ -45,10 +45,10 @@ Never add hidden malicious behavior. Do not generate honeypots, fake renounce lo
 
 Keep this file in context first. Load references only when needed:
 
-- `../_shared/references/security-posture.md`: consult for value custody, access control, signatures, oracles, bridge logic, pausing, and forbidden patterns.
-- `../_shared/references/openzeppelin-defaults.md`: consult when selecting standard primitives, roles, token transfer helpers, or upgradeable variants.
-- `../_shared/references/foundry-conventions.md`: consult when creating a project layout, Foundry tests, deployment scripts, README content, or verification notes.
-- `../_shared/references/mainnet-readiness.md`: consult before making production or mainnet-readiness claims.
+- `../../shared/references/security-posture.md`: consult for value custody, access control, signatures, oracles, bridge logic, pausing, and forbidden patterns.
+- `../../shared/references/openzeppelin-defaults.md`: consult when selecting standard primitives, roles, token transfer helpers, or upgradeable variants.
+- `../../shared/references/foundry-conventions.md`: consult when creating a project layout, Foundry tests, deployment scripts, README content, or verification notes.
+- `../../shared/references/mainnet-readiness.md`: consult before making production or mainnet-readiness claims.
 - `references/contract-patterns.md`: consult for ERC20, NFT, staking, rewards, vault, vesting, escrow, treasury, governance, AMM, Uniswap v4 hook, and bridge-specific rules.
 
 Use `templates/` as starting points when the user asks for concrete files or a scaffold.

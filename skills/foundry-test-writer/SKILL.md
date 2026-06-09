@@ -29,9 +29,9 @@ Do not use it for frontend tests, non-EVM tests, or generic Solidity implementat
 
 Load shared references as needed:
 
-- `../_shared/references/foundry-conventions.md` for project layout and cheatcodes.
-- `../_shared/references/security-posture.md` for security-relevant edge cases.
-- `../_shared/references/mainnet-readiness.md` for production test expectations.
+- `../../shared/references/foundry-conventions.md` for project layout and cheatcodes.
+- `../../shared/references/security-posture.md` for security-relevant edge cases.
+- `../../shared/references/mainnet-readiness.md` for production test expectations.
 
 Load local references as needed:
 

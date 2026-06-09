@@ -30,9 +30,9 @@ Do not use it when immutable contracts are sufficient and upgradeability was not
 
 Load shared references as needed:
 
-- `../_shared/references/openzeppelin-defaults.md` for upgradeable defaults.
-- `../_shared/references/security-posture.md` for admin trust and initialization risks.
-- `../_shared/references/mainnet-readiness.md` for production upgrade gates.
+- `../../shared/references/openzeppelin-defaults.md` for upgradeable defaults.
+- `../../shared/references/security-posture.md` for admin trust and initialization risks.
+- `../../shared/references/mainnet-readiness.md` for production upgrade gates.
 
 Load local references as needed:
 

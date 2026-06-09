@@ -30,8 +30,8 @@ Do not use it for generic AMM integration unless hook-specific behavior is invol
 
 Load shared references as needed:
 
-- `../_shared/references/security-posture.md` for manipulation, oracle, and accounting risks.
-- `../_shared/references/foundry-conventions.md` for test structure.
+- `../../shared/references/security-posture.md` for manipulation, oracle, and accounting risks.
+- `../../shared/references/foundry-conventions.md` for test structure.
 
 Load local references as needed:
 

@@ -6,14 +6,14 @@ Use this adapter when working with an agent environment that supports local Mark
 
 1. Copy or expose the `skills/` folder to the agent workspace.
 2. Choose the skill for the job.
-3. Ensure that skill's `SKILL.md`, `references/`, `templates/`, and `skills/_shared/references/` are readable.
+3. Ensure that skill's `SKILL.md`, `references/`, `templates/`, and `shared/references/` are readable.
 4. Ask the agent to use the chosen `SKILL.md` first, then load references as needed.
 
 Example prompt:
 
 ```text
 Use skills/foundry-test-writer/SKILL.md to add tests for this staking contract.
-Consult skills/_shared/references/foundry-conventions.md for Foundry conventions.
+Consult shared/references/foundry-conventions.md for Foundry conventions.
 ```
 
 ## Notes

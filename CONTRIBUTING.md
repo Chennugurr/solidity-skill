@@ -45,7 +45,7 @@ description: Build and test secure Solidity smart contracts with safer defaults.
 - Document assumptions and trust boundaries.
 - Avoid instructions that produce hidden owner powers, honeypots, deceptive token behavior, or backdoors.
 - Keep reusable content in `skills/`.
-- Put guidance that applies to several skills in `skills/_shared/references/`.
+- Put guidance that applies to several skills in `shared/references/`.
 - Keep product-specific instructions in `adapters/`.
 - Add sample prompts under `examples/` when a new workflow would benefit from them.
 - Add templates only when they are broadly reusable.

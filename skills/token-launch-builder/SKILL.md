@@ -29,9 +29,9 @@ Do not use it to create deceptive launch mechanics, hidden owner powers, honeypo
 
 Load shared references as needed:
 
-- `../_shared/references/security-posture.md` for forbidden patterns and launch safety.
-- `../_shared/references/openzeppelin-defaults.md` for token primitives.
-- `../_shared/references/mainnet-readiness.md` for deployment readiness.
+- `../../shared/references/security-posture.md` for forbidden patterns and launch safety.
+- `../../shared/references/openzeppelin-defaults.md` for token primitives.
+- `../../shared/references/mainnet-readiness.md` for deployment readiness.
 
 Load local references as needed:
 

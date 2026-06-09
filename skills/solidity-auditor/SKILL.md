@@ -30,9 +30,9 @@ Do not use it for first-pass implementation unless the user asks for review whil
 
 Load shared references as needed:
 
-- `../_shared/references/security-posture.md` for forbidden patterns, assumptions, and security language.
-- `../_shared/references/openzeppelin-defaults.md` for standard primitive expectations.
-- `../_shared/references/mainnet-readiness.md` for production-readiness claims.
+- `../../shared/references/security-posture.md` for forbidden patterns, assumptions, and security language.
+- `../../shared/references/openzeppelin-defaults.md` for standard primitive expectations.
+- `../../shared/references/mainnet-readiness.md` for production-readiness claims.
 
 Load local references as needed:
 

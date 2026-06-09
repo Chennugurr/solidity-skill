@@ -30,9 +30,9 @@ Do not use it to decide protocol economics or implement contract logic unless de
 
 Load shared references as needed:
 
-- `../_shared/references/foundry-conventions.md` for script conventions.
-- `../_shared/references/mainnet-readiness.md` for deployment gates.
-- `../_shared/references/security-posture.md` for privileged role and secret handling.
+- `../../shared/references/foundry-conventions.md` for script conventions.
+- `../../shared/references/mainnet-readiness.md` for deployment gates.
+- `../../shared/references/security-posture.md` for privileged role and secret handling.
 
 Load local references as needed:
 

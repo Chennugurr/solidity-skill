@@ -29,9 +29,9 @@ Do not use it when the user only needs a tiny code change with clear requirement
 
 Load shared references as needed:
 
-- `../_shared/references/security-posture.md` for assumptions and trust boundaries.
-- `../_shared/references/openzeppelin-defaults.md` for standard primitives.
-- `../_shared/references/mainnet-readiness.md` for production gates.
+- `../../shared/references/security-posture.md` for assumptions and trust boundaries.
+- `../../shared/references/openzeppelin-defaults.md` for standard primitives.
+- `../../shared/references/mainnet-readiness.md` for production gates.
 
 Load local references as needed:
 

@@ -30,9 +30,9 @@ Do not use it for token branding, generic deployment, or non-financial contract 
 
 Load shared references as needed:
 
-- `../_shared/references/security-posture.md` for accounting and value-flow risks.
-- `../_shared/references/openzeppelin-defaults.md` for ERC4626 and token transfer defaults.
-- `../_shared/references/foundry-conventions.md` for invariant test conventions.
+- `../../shared/references/security-posture.md` for accounting and value-flow risks.
+- `../../shared/references/openzeppelin-defaults.md` for ERC4626 and token transfer defaults.
+- `../../shared/references/foundry-conventions.md` for invariant test conventions.
 
 Load local references as needed:
 
