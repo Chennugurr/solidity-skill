@@ -33,6 +33,7 @@ Load shared references as needed:
 - `../../shared/references/openzeppelin-defaults.md` for upgradeable defaults.
 - `../../shared/references/security-posture.md` for admin trust and initialization risks.
 - `../../shared/references/mainnet-readiness.md` for production upgrade gates.
+- `../../shared/references/advanced-protocols.md` for timelock, governance, L2, bridge, and account-abstraction interactions with upgrades.
 
 Load local references as needed:
 
@@ -72,4 +73,3 @@ Upgradeability introduces admin trust risk. Users must trust the upgrade authori
 ## Safety Rule
 
 Do not add upgradeability as a convenience. Use it only when the user explicitly asks for it or the existing system already requires it.
-

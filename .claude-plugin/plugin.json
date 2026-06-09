@@ -1,7 +1,7 @@
 {
   "name": "solidity-skill",
   "displayName": "Solidity Skill",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Vendor-neutral Solidity agent skill suite for building, auditing, testing, deploying, and specifying EVM smart contracts.",
   "author": {
     "name": "Chennugurr",

@@ -12,6 +12,7 @@ Load `SKILL.md` first. Load references only when the review needs them.
 - `references/vulnerability-classes.md`
 - `references/finding-format.md`
 - `templates/AuditReport.md`
+- `templates/ToolFindingsTriage.md`
+- `templates/FalsePositiveTriage.md`
 
 Generated findings are not a substitute for a professional audit.
-

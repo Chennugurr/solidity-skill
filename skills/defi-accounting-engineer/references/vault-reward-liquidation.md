@@ -11,6 +11,9 @@ For ERC4626-like systems:
 - Test zero supply.
 - Test rounding at small amounts.
 - Do not assume strategy assets are instantly liquid unless the design says so.
+- Test first-depositor inflation and donation behavior.
+- Define whether virtual shares/assets or minimum liquidity are used.
+- Treat exchange-rate jumps as adversarial unless caused by expected yield.
 
 ## Rewards
 
@@ -24,6 +27,20 @@ For staking or reward distribution:
 - Use pull-based claims.
 - Ensure reward rate does not exceed funded rewards.
 - Test multiple users entering and exiting at different times.
+- Track rewards paid, rewards claimable, and rewards remaining.
+- Test fee-on-transfer or rebasing reward tokens only if supported.
+- Define dust handling and final-period rounding behavior.
+
+## Fees
+
+For fee accounting:
+
+- Define fee recipient.
+- Define fee base: assets, shares, yield, profit, notional, or debt.
+- Cap fee rates.
+- State rounding direction.
+- Test fee updates, maximum fees, zero fees, and fee accrual timing.
+- Ensure fees cannot make the system insolvent.
 
 ## Liquidations
 
@@ -38,6 +55,19 @@ For lending and liquidation systems:
 - Bound liquidation incentive.
 - Test borderline health factors.
 - Test stale or manipulated oracle data.
+- Test partial liquidation, full liquidation, dust debt, and underwater positions.
+- Ensure liquidation incentives cannot exceed configured bounds.
+- Ensure liquidation improves the position or closes it according to the spec.
+
+## Oracles And Normalization
+
+For price-dependent accounting:
+
+- Normalize token decimals and oracle decimals before computing value.
+- Reject stale, zero, negative, or incomplete prices.
+- Define heartbeat and staleness thresholds.
+- Avoid using manipulable spot prices for critical solvency decisions.
+- Include sequencer or liveness checks where the target chain requires them.
 
 ## Invariants
 
@@ -49,4 +79,5 @@ Common invariants:
 - Users cannot redeem more than their pro-rata share.
 - Fees never exceed configured caps.
 - Liquidations improve or close unhealthy positions according to the spec.
-
+- Exchange-rate changes are explained by deposits, withdrawals, fees, donations, losses, or yield.
+- Oracle-normalized values use consistent precision.

@@ -21,3 +21,5 @@ Consult shared/references/foundry-conventions.md for Foundry conventions.
 - The core skills are not Codex-specific.
 - Keep product-specific installation paths outside the skill body.
 - If your runtime has a formal skill directory, copy the individual skill folders there without changing their content.
+- For plugin packaging, `.codex-plugin/plugin.json` points at `./skills/`.
+- Use `python3 scripts/validate-suite.py --package --compile-templates --external-plugin-validators` before publishing plugin updates.

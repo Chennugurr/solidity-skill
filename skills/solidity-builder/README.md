@@ -7,7 +7,13 @@ This folder contains the vendor-neutral `solidity-builder` skill.
 - `SKILL.md`: the compact operating instructions agents should load first.
 - `references/contract-patterns.md`: contract-specific rules for common Solidity systems.
 - `templates/`: reusable Solidity, Foundry test, and deploy script starters.
-- `../../shared/references/`: suite-wide security, Foundry, OpenZeppelin, and mainnet-readiness references.
+- `../../shared/references/`: suite-wide security, Foundry, OpenZeppelin, security tooling, advanced protocol, and mainnet-readiness references.
+
+## Template Families
+
+- ERC20, ERC721, ERC1155, and ERC4626.
+- Merkle claims, vesting, staking rewards, governance/timelock, and votes tokens.
+- Foundry tests, deploy scripts, and CREATE2 deployment.
 
 ## How To Use
 

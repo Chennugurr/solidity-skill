@@ -33,6 +33,7 @@ Load shared references as needed:
 - `../../shared/references/foundry-conventions.md` for script conventions.
 - `../../shared/references/mainnet-readiness.md` for deployment gates.
 - `../../shared/references/security-posture.md` for privileged role and secret handling.
+- `../../shared/references/advanced-protocols.md` for CREATE2, L2, bridge, oracle, and governance deployment assumptions.
 
 Load local references as needed:
 
@@ -73,4 +74,3 @@ Use `templates/DeployRunbook.md` for deployment documentation.
 ## Safety Rule
 
 If tests, audit status, constructor arguments, or admin addresses are unclear, mark deployment as blocked rather than pretending it is ready.
-

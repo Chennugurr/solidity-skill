@@ -35,3 +35,5 @@ This skill pack should work with agents that support:
 - Local file access.
 - Project-aware code editing.
 - Optional template copying.
+
+For packaged single-skill uploads, generate archives with `python3 scripts/package-upload-skills.py` and upload the relevant `dist/<skill-name>.zip`.

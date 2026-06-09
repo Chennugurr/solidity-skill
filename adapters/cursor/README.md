@@ -20,3 +20,4 @@ Turn this staking idea into an implementation-ready spec before writing Solidity
 - The core skills are not Cursor-specific.
 - If you convert a skill into editor rules, preserve the YAML frontmatter in the source `SKILL.md`.
 - Keep long reference details as separate files so routine prompts stay small.
+- Use `docs/distribution.md` to decide whether to reference individual skills or the whole suite.

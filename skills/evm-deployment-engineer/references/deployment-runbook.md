@@ -37,6 +37,30 @@ forge script script/Deploy.s.sol --rpc-url "$RPC_URL" --broadcast --verify
 
 Use dry-run or simulation before `--broadcast` when possible.
 
+## CREATE2 Deployments
+
+For deterministic addresses:
+
+- Record deployer address.
+- Record salt.
+- Record bytecode hash.
+- Record constructor or initializer arguments.
+- Compute the predicted address before broadcast.
+- Confirm the target address has no code before deploy.
+- Explain that address changes if deployer, salt, bytecode, or constructor arguments change.
+- Keep salt values non-secret unless the deployment flow intentionally requires coordination.
+
+Use `skills/solidity-builder/templates/Create2Deploy.s.sol` as a starting point when a Foundry script is requested.
+
+## L2 Deployments
+
+For L2s and appchains:
+
+- Confirm chain ID, gas token, block time, finality, explorer, and verification flow.
+- Confirm bridge, messenger, oracle, and predeploy addresses against target-chain docs.
+- Account for sequencer downtime assumptions when oracle or liquidation logic depends on liveness.
+- Run fork or simulation tests against the target chain for live integrations.
+
 ## Post-Deploy
 
 - Save deployed addresses.
@@ -50,4 +74,3 @@ Use dry-run or simulation before `--broadcast` when possible.
 - Transfer ownership or roles to multisig/timelock.
 - Revoke temporary permissions.
 - Update downstream configs.
-

@@ -49,9 +49,10 @@ Keep this file in context first. Load references only when needed:
 - `../../shared/references/openzeppelin-defaults.md`: consult when selecting standard primitives, roles, token transfer helpers, or upgradeable variants.
 - `../../shared/references/foundry-conventions.md`: consult when creating a project layout, Foundry tests, deployment scripts, README content, or verification notes.
 - `../../shared/references/mainnet-readiness.md`: consult before making production or mainnet-readiness claims.
+- `../../shared/references/advanced-protocols.md`: consult for signatures, permits, oracles, account abstraction, bridges, L2s, and governance operations.
 - `references/contract-patterns.md`: consult for ERC20, NFT, staking, rewards, vault, vesting, escrow, treasury, governance, AMM, Uniswap v4 hook, and bridge-specific rules.
 
-Use `templates/` as starting points when the user asks for concrete files or a scaffold.
+Use `templates/` as starting points when the user asks for concrete files or a scaffold. Available starter templates include ERC20, ERC721, ERC1155, ERC4626, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, deploy scripts, and CREATE2 deployment.
 
 ## Default Standards
 

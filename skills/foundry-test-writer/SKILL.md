@@ -32,6 +32,7 @@ Load shared references as needed:
 - `../../shared/references/foundry-conventions.md` for project layout and cheatcodes.
 - `../../shared/references/security-posture.md` for security-relevant edge cases.
 - `../../shared/references/mainnet-readiness.md` for production test expectations.
+- `../../shared/references/security-tooling.md` for when Foundry fuzz/invariants should be escalated to external property or formal tools.
 
 Load local references as needed:
 
@@ -50,6 +51,7 @@ Use templates in `templates/` when the user asks for test files or examples.
 - Use fuzzing for variable amounts, durations, addresses, and configuration boundaries.
 - Use invariants for conservation, solvency, and share/reward accounting.
 - Use fork tests when external protocol behavior matters.
+- Escalate from unit tests to fuzz tests, invariant tests, fork tests, and external property tools as protocol value and state-space complexity increase.
 
 ## Output Format
 
@@ -74,4 +76,3 @@ When editing a repo, add focused tests and explain what they cover.
 ## Safety Rule
 
 Tests should catch unsafe assumptions, not merely confirm the current implementation. If the implementation looks wrong, call it out instead of writing tests that bless the bug.
-

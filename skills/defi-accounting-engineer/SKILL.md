@@ -33,6 +33,7 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for accounting and value-flow risks.
 - `../../shared/references/openzeppelin-defaults.md` for ERC4626 and token transfer defaults.
 - `../../shared/references/foundry-conventions.md` for invariant test conventions.
+- `../../shared/references/advanced-protocols.md` for oracle normalization, cross-chain assumptions, and governance-controlled accounting updates.
 
 Load local references as needed:
 
@@ -74,4 +75,3 @@ Use `templates/InvariantChecklist.md` when drafting accounting checks.
 ## Safety Rule
 
 If the accounting model cannot be made solvent from the provided spec, stop and explain the missing funding, oracle, or invariant requirement.
-

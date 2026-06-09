@@ -56,7 +56,19 @@ Identify missing:
 - Upgrade and migration tests.
 - Failure-mode tests for non-standard tokens or stale oracles.
 
-## 5. Write Findings
+## 5. Run Or Review Tooling
+
+Use tools as supporting evidence:
+
+- Run or request Slither output for static analysis.
+- Review Foundry fuzz and invariant coverage.
+- Recommend Echidna or another property tool when long stateful call sequences matter.
+- Recommend SMTChecker or formal rules for small critical invariants.
+- Triage findings into confirmed issues, false positives, informational items, and manual-review items.
+
+Do not treat tool output as a complete audit.
+
+## 6. Write Findings
 
 Each finding should include:
 
@@ -68,4 +80,3 @@ Each finding should include:
 - Tests that would catch the issue.
 
 Avoid vague phrasing. If the issue depends on an assumption, state the assumption.
-

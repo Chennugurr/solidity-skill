@@ -59,6 +59,7 @@ When building ERC721 contracts:
 - Protect withdraw with access control.
 - Avoid loops that exceed gas limits.
 - Add tests for minting, supply caps, payment, withdraw, and token URI.
+- Use `../templates/BasicERC721.sol` for a simple capped owner-mint collection.
 
 For allowlists:
 
@@ -80,6 +81,7 @@ When building ERC1155 contracts:
 - Define URI strategy.
 - Include batch mint only if needed.
 - Add tests for minting, burning, URI, and access control.
+- Use `../templates/BasicERC1155.sol` for owner-mint items with supply tracking.
 
 ## Staking
 
@@ -130,6 +132,7 @@ When building vaults:
 - Explain fee model if any.
 - Explain who can manage strategy assets if a strategy exists.
 - Add tests for first deposit, second deposit, rounding, share price increase, withdrawal, and donation or inflation edge cases.
+- Use `../templates/BasicERC4626Vault.sol` only for no-strategy, no-fee vault drafts.
 
 Vault invariants:
 
@@ -156,6 +159,7 @@ For Merkle claims:
 - Leaf should include user address and amount.
 - Consider including campaign ID or contract address in the leaf construction if replay is possible.
 - Track claimed by address or by leaf depending on design.
+- Use `../templates/MerkleClaim.sol` for a pull-based ERC20 claim draft.
 
 ## Vesting
 
@@ -171,6 +175,7 @@ When building vesting contracts:
 - Use pull-based release.
 - Use `SafeERC20`.
 - Add tests before cliff, during vesting, after full vesting, partial release, and revocation if supported.
+- Use `../templates/TokenVesting.sol` for a single-beneficiary linear vesting draft.
 
 ## Escrow
 
@@ -223,6 +228,56 @@ When building governance-related contracts:
 - Define cancellation rules.
 - Avoid vote manipulation through same-block token transfers.
 - Prefer established governance frameworks where appropriate.
+- Use `../templates/VotesERC20.sol`, `../templates/SimpleGovernor.sol`, and `../templates/GovernanceTimelock.sol` for a minimal votes-token, governor, and timelock draft.
+
+Governance setup must define:
+
+- Who can propose.
+- Who can execute.
+- Who can cancel.
+- Who holds temporary admin rights during setup.
+- When temporary admin rights are revoked.
+- Whether execution is open or restricted.
+
+## Signatures And Permits
+
+When building signature flows:
+
+- Use EIP-712 typed data where practical.
+- Include nonce, deadline, chain ID, verifying contract, signer, and action-specific parameters.
+- Consume nonces before or during execution so signatures cannot be replayed.
+- Reject expired signatures.
+- Support contract wallets only when ERC1271 support is intentional and tested.
+- For Permit2 integrations, define spender, token, amount, expiration, and revocation expectations.
+
+## Oracles
+
+When building oracle-dependent contracts:
+
+- Define source, heartbeat, decimals, and staleness threshold.
+- Normalize all prices and token decimals before computing value.
+- Reject zero, negative, stale, or incomplete prices.
+- Avoid low-liquidity spot prices for settlement.
+- Include tests for stale prices, decimal mismatches, and manipulated prices.
+
+## Bridges And Cross-Chain
+
+When building cross-chain systems:
+
+- Treat bridge or messenger contracts as trusted dependencies.
+- Bind messages to source chain, destination chain, sender, recipient, nonce, and payload.
+- Prevent replay across deployments and chains.
+- Define retry, cancellation, and finality assumptions.
+- Test duplicate messages, wrong senders, wrong chains, and malformed payloads.
+
+## Account Abstraction
+
+When account abstraction or smart contract wallets matter:
+
+- Do not use `tx.origin`.
+- Do not assume callers are EOAs.
+- Decide whether ERC1271 signatures are supported.
+- Test contract-wallet callers for authorization-sensitive flows.
 
 ## AMM And DEX Integrations
 
@@ -258,6 +313,16 @@ When building Uniswap v4 hooks:
 - Include hook deployment and address mining notes if relevant.
 
 If the task is deeply v4-specific, recommend a dedicated Uniswap v4 hook skill or review pass after the builder draft.
+
+## CREATE2 Deployment
+
+When deterministic deployment is requested:
+
+- Define deployer, salt, bytecode, constructor args, and target chain.
+- Explain that the address changes if deployer, salt, bytecode, or constructor args change.
+- Compute the address before broadcast.
+- Simulate before broadcast.
+- Use `../templates/Create2Deploy.s.sol` as a Foundry script starting point.
 
 ## Specialized Handoffs
 

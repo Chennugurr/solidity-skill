@@ -32,6 +32,7 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for forbidden patterns and launch safety.
 - `../../shared/references/openzeppelin-defaults.md` for token primitives.
 - `../../shared/references/mainnet-readiness.md` for deployment readiness.
+- `../../shared/references/advanced-protocols.md` for permit, vesting governance, L2 launch, and cross-chain launch assumptions.
 
 Load local references as needed:
 
@@ -74,4 +75,3 @@ Use `templates/TokenLaunchChecklist.md` for launch planning.
 ## Safety Rule
 
 Refuse hidden or deceptive token mechanics. Offer transparent alternatives that users, wallets, and auditors can understand.
-

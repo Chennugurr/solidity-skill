@@ -125,7 +125,18 @@ RPC_URL=
 ETHERSCAN_API_KEY=
 OWNER=
 TREASURY=
+CREATE2_SALT=
 ```
 
 Never include real private keys, mnemonics, RPC credentials, or API keys in generated files.
 
+## CI Command Shape
+
+For suite or project CI, prefer:
+
+```bash
+forge build
+forge test
+```
+
+Use higher fuzz or invariant run counts in CI only when runtime is acceptable and results remain reproducible.

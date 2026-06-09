@@ -35,3 +35,5 @@ Review these contracts and consult shared/references/security-posture.md before 
 - The core skills are not Claude-specific.
 - Do not paste every reference file into context unless the task needs it.
 - For long-running projects, keep this repository checked into the workspace so references and templates remain available.
+- Use `python3 scripts/package-upload-skills.py` if you need one zip per skill for an upload UI.
+- Use `docs/distribution.md` for the compatibility matrix.

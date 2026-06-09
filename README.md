@@ -6,6 +6,8 @@ It is intentionally vendor-neutral. The core skills are not tied to any single a
 
 This repository is also packaged as both a Codex plugin and a Claude Code plugin named `solidity-skill`. Product-specific plugin metadata lives in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
 
+Current suite target: `v1.0.0`.
+
 ## What Is Included
 
 Core skills:
@@ -25,12 +27,14 @@ Advanced skills:
 
 Shared support:
 
-- `shared/`: reusable security, Foundry, OpenZeppelin, and mainnet-readiness references.
+- `shared/`: reusable security, Foundry, OpenZeppelin, security tooling, advanced protocol, and mainnet-readiness references.
 - `.codex-plugin/plugin.json`: Codex plugin manifest that loads the nine skills from `./skills/`.
 - `.claude-plugin/plugin.json`: Claude Code plugin manifest; Claude Code auto-discovers the root `skills/` directory.
 - `adapters/`: notes for using the skill suite with different agent environments.
 - `examples/`: sample prompts and expected usage patterns.
 - `docs/`: design notes and roadmap.
+- `scripts/validate-suite.py`: structural validation, packaging checks, manifest checks, and optional Solidity template compilation.
+- `.github/workflows/ci.yml`: GitHub Actions workflow for validation and template compilation.
 
 ## Quick Start
 
@@ -81,6 +85,26 @@ python3 scripts/package-upload-skills.py
 ```
 
 This writes one zip per skill to `dist/`, including bundled shared references under `references/shared/`. For a first upload, use `dist/solidity-builder.zip`.
+
+## Validation And Release Assets
+
+Validate the suite locally:
+
+```bash
+python3 scripts/validate-suite.py --package --compile-templates --external-plugin-validators
+```
+
+Build GitHub release assets:
+
+```bash
+python3 scripts/build-release-assets.py
+```
+
+See `docs/distribution.md` for the compatibility matrix and upload/release notes.
+
+## Template Coverage
+
+The builder skill includes compile-checked starter templates for ERC20, ERC721, ERC1155, ERC4626, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, and Foundry deploy scripts including CREATE2.
 
 ## Skill Philosophy
 

@@ -44,3 +44,22 @@ Risks:
 
 Production upgrade authority should usually be a multisig or timelock. Document emergency upgrade powers and user trust assumptions.
 
+## Governance-Controlled Upgrades
+
+When upgrades are governed:
+
+- Define proposer, voter, executor, canceller, and emergency roles.
+- Confirm the proxy admin or upgrade role is controlled by the governance executor or timelock.
+- Test proposal, queue, execute, and cancellation flows.
+- Test unauthorized upgrades through the proxy and implementation.
+- Document whether emergency upgrades bypass normal governance.
+
+## L2 And Cross-Chain Upgrades
+
+For L2 or cross-chain systems:
+
+- Define which chain controls upgrade authority.
+- Define bridge or messenger trust assumptions.
+- Include replay protection for cross-chain upgrade messages.
+- Account for delayed finality and message cancellation rules.
+- Test wrong-chain, wrong-sender, duplicate-message, and stale-message failures.

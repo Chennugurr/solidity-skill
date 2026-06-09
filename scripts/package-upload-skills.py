@@ -55,6 +55,8 @@ def build_skill_zip(skill_dir: Path) -> Path:
 def main() -> None:
     DIST_DIR.mkdir(exist_ok=True)
     for old_zip in DIST_DIR.glob("*.zip"):
+        if old_zip.name == "solidity-agent-skills-source.zip":
+            continue
         old_zip.unlink()
 
     skill_dirs = sorted(path for path in SKILLS_DIR.iterdir() if (path / "SKILL.md").is_file())

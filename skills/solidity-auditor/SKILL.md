@@ -33,6 +33,8 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for forbidden patterns, assumptions, and security language.
 - `../../shared/references/openzeppelin-defaults.md` for standard primitive expectations.
 - `../../shared/references/mainnet-readiness.md` for production-readiness claims.
+- `../../shared/references/security-tooling.md` when reviewing or recommending Slither, Echidna, SMTChecker, or formal/property tooling.
+- `../../shared/references/advanced-protocols.md` for signatures, oracles, account abstraction, bridges, L2s, and governance operations.
 
 Load local references as needed:
 
@@ -40,7 +42,7 @@ Load local references as needed:
 - `references/vulnerability-classes.md` for issue categories.
 - `references/finding-format.md` for report structure.
 
-Use `templates/AuditReport.md` when the user asks for a written report.
+Use `templates/AuditReport.md` when the user asks for a written report. Use `templates/ToolFindingsTriage.md` and `templates/FalsePositiveTriage.md` for tool-output review.
 
 ## Review Posture
 
@@ -87,4 +89,3 @@ If no issues are found, say so clearly and list remaining review limits.
 ## Safety Rule
 
 Do not provide exploit instructions for live vulnerable systems beyond what is needed for defensive remediation. Prefer minimal proof-of-concept reasoning and concrete fixes.
-
