@@ -10,13 +10,13 @@ Create a new folder under `skills/`:
 
 ```text
 skills/
-  _shared/
-    references/
   your-skill-name/
     SKILL.md
     README.md
     references/
     templates/
+shared/
+  references/
 ```
 
 Every `SKILL.md` must:
