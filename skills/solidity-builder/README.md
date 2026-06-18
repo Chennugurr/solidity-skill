@@ -9,11 +9,12 @@ This folder contains the vendor-neutral `solidity-builder` skill.
 - `references/security-defaults.md`: builder-local index for security defaults.
 - `references/foundry-patterns.md`: builder-local index for Foundry defaults.
 - `templates/`: reusable Solidity, Foundry test, and deploy script starters.
-- `../../shared/references/`: suite-wide security, Foundry, OpenZeppelin, security tooling, advanced protocol, and mainnet-readiness references.
+- `../../shared/references/`: suite-wide security, Foundry, OpenZeppelin, gas, access-management, security tooling, advanced protocol, and mainnet-readiness references.
 
 ## Template Families
 
-- ERC20, ERC721, ERC1155, and ERC4626.
+- ERC20, ERC20Permit, ERC721, ERC2981, ERC1155, ERC6909, and ERC4626.
+- ERC1271 signature validation, ERC3156 flash minting, and AccessManager-managed ERC20.
 - Merkle claims, vesting, staking rewards, governance/timelock, and votes tokens.
 - Foundry tests, deploy scripts, and CREATE2 deployment.
 

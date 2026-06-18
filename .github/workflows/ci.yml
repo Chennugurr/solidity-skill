@@ -25,3 +25,10 @@ jobs:
 
       - name: Validate suite
         run: python3 scripts/validate-suite.py --package --compile-templates
+
+      - name: Install Slither
+        run: python3 -m pip install slither-analyzer
+
+      - name: Run Slither template scan
+        run: python3 scripts/run-slither-template-check.py
+        continue-on-error: true

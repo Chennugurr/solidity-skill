@@ -61,6 +61,17 @@ For L2s and appchains:
 - Account for sequencer downtime assumptions when oracle or liquidation logic depends on liveness.
 - Run fork or simulation tests against the target chain for live integrations.
 
+## AccessManager Setup
+
+For AccessManager deployments:
+
+- Deploy or identify the manager before managed targets.
+- Record manager admin, role IDs, role labels, target function selectors, grant delays, and execution delays.
+- Configure target function roles after targets deploy.
+- Grant roles to multisigs, keepers, operators, or emergency responders.
+- Run authorized and unauthorized smoke checks for every restricted selector.
+- Transfer or revoke temporary deployer authority.
+
 ## Post-Deploy
 
 - Save deployed addresses.

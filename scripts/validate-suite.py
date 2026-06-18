@@ -95,7 +95,7 @@ def resolve_reference(source: Path, reference: str) -> Path | None:
         reference = reference[2:]
     if reference.startswith("../") or reference.startswith("references/") or reference.startswith("templates/"):
         return (source.parent / reference).resolve()
-    if reference.startswith(("skills/", "shared/", "adapters/", "examples/", "docs/", "scripts/", ".github/")):
+    if reference.startswith(("skills/", "shared/", "security/", "adapters/", "examples/", "docs/", "scripts/", ".github/")):
         return (ROOT / reference).resolve()
     if reference.startswith((".codex-plugin/", ".claude-plugin/")):
         return (ROOT / reference).resolve()
@@ -108,6 +108,9 @@ def validate_referenced_paths() -> None:
         *ROOT.glob(".*-plugin/*.json"),
         *ROOT.glob("adapters/*/*.md"),
         *ROOT.glob("docs/*.md"),
+        *ROOT.glob("security/*.md"),
+        *ROOT.glob("security/*.json"),
+        *ROOT.glob("security/*.yaml"),
         *ROOT.glob("examples/*/*.md"),
         *ROOT.glob("skills/*/SKILL.md"),
         *ROOT.glob("skills/*/README.md"),
@@ -177,6 +180,16 @@ def validate_plugin_manifests() -> None:
     present = unsupported.intersection(codex)
     if present:
         raise SuiteError(f".codex-plugin/plugin.json has unsupported fields: {sorted(present)}")
+
+
+def validate_security_configs() -> None:
+    slither_config = ROOT / "security" / "slither.config.json"
+    echidna_config = ROOT / "security" / "echidna.yaml"
+    if not slither_config.is_file():
+        raise SuiteError("security/slither.config.json is missing")
+    if not echidna_config.is_file():
+        raise SuiteError("security/echidna.yaml is missing")
+    json.loads(slither_config.read_text(encoding="utf-8"))
 
 
 def validate_packaged_zips() -> None:
@@ -258,6 +271,7 @@ def main() -> int:
         validate_examples(skill_names)
         validate_vendor_neutral_core()
         validate_plugin_manifests()
+        validate_security_configs()
         if args.package:
             validate_packaged_zips()
         if args.compile_templates:

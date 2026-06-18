@@ -12,5 +12,5 @@ Load `SKILL.md` first, then load local references for the test type needed.
 - `references/fork-and-deploy-tests.md`
 - `templates/UnitTest.t.sol`
 - `templates/InvariantTest.t.sol`
+- `templates/SecurityInvariantHarness.t.sol`
 - `templates/ForkTest.t.sol`
-

@@ -9,6 +9,7 @@ Use Slither for fast static analysis and code comprehension.
 Good uses:
 
 - Run `slither .` from the project root after dependencies compile.
+- Start from `security/slither.config.json` when the repository provides it.
 - Review high and medium detector output first.
 - Use printers for inheritance, authorization, storage, and function summaries.
 - Treat noisy findings as triage work, not automatic dismissals.
@@ -26,6 +27,7 @@ Use Echidna when properties need long stateful call sequences or independent fuz
 
 Good uses:
 
+- Start from `security/echidna.yaml` when the repository provides it.
 - Encode value-preservation, solvency, authorization, and supply invariants.
 - Prefer small harnesses with explicit actors and bounded setup.
 - Save counterexample sequences and convert important ones into regression tests.
@@ -73,3 +75,5 @@ When reporting tool results:
 - Explain exploitability or why it is not exploitable.
 - Recommend code fixes and tests.
 - Never summarize a tool run as an audit.
+
+Use `tool-output-triage.md` for classification details.

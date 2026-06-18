@@ -45,6 +45,20 @@ If taxes exist:
 - Explain who receives fees.
 - Do not hide taxes.
 
+For permit support:
+
+- Use EIP-2612 only when signature approvals are needed.
+- Confirm token name stability because it affects the permit domain separator.
+- Test nonce consumption, deadline expiry, invalid signer, and replay failure.
+- Use `../templates/ERC20PermitToken.sol` for a fixed-supply permit draft.
+
+For flash minting:
+
+- Use ERC3156 only when flash liquidity is explicitly part of the design.
+- Define maximum flash loan behavior and fee receiver.
+- Test receiver return value, repayment approval, fee handling, and cap behavior.
+- Use `../templates/ERC3156FlashMintToken.sol` as a capped flash-mint draft.
+
 ## ERC721
 
 When building ERC721 contracts:
@@ -70,6 +84,7 @@ For royalties:
 
 - Use ERC2981 if needed.
 - Explain marketplace enforcement limitations.
+- Use `../templates/RoyaltyERC721.sol` for an ERC721 royalty metadata draft.
 
 ## ERC1155
 
@@ -82,6 +97,17 @@ When building ERC1155 contracts:
 - Include batch mint only if needed.
 - Add tests for minting, burning, URI, and access control.
 - Use `../templates/BasicERC1155.sol` for owner-mint items with supply tracking.
+
+## ERC6909
+
+When building ERC6909 contracts:
+
+- Use only when the lightweight multi-token model fits better than ERC1155.
+- Explain that ERC6909 does not use ERC1155 receiver hooks or URI behavior.
+- Define token IDs, metadata, mint authority, burn authority, and operator expectations.
+- Add tests for minting, burning, approvals, operator approvals, metadata, and total supply.
+- Mark ERC6909 templates as draft-aware if downstream tooling support is uncertain.
+- Use `../templates/BasicERC6909.sol` for owner-controlled ERC6909 drafts.
 
 ## Staking
 
@@ -239,6 +265,15 @@ Governance setup must define:
 - When temporary admin rights are revoked.
 - Whether execution is open or restricted.
 
+## AccessManager
+
+When using OpenZeppelin AccessManager:
+
+- Define manager admin, target contracts, restricted selectors, role IDs, role labels, grant delays, and execution delays.
+- Prefer multisig or timelock control of the manager admin in production.
+- Test unauthorized calls, authorized calls, delayed scheduled calls, cancelled calls, and admin handoff.
+- Use `../templates/AccessManagedERC20.sol` for a minimal managed-token draft.
+
 ## Signatures And Permits
 
 When building signature flows:
@@ -249,6 +284,8 @@ When building signature flows:
 - Reject expired signatures.
 - Support contract wallets only when ERC1271 support is intentional and tested.
 - For Permit2 integrations, define spender, token, amount, expiration, and revocation expectations.
+- Use ERC1271 when contract wallets must validate signatures.
+- Use `../templates/ERC1271SignatureValidator.sol` for a minimal contract-wallet signature validation draft.
 
 ## Oracles
 

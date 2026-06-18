@@ -33,6 +33,7 @@ Load shared references as needed:
 - `../../shared/references/foundry-conventions.md` for script conventions.
 - `../../shared/references/mainnet-readiness.md` for deployment gates.
 - `../../shared/references/security-posture.md` for privileged role and secret handling.
+- `../../shared/references/access-management.md` for role setup, AccessManager configuration, admin handoff, and emergency powers.
 - `../../shared/references/advanced-protocols.md` for CREATE2, L2, bridge, oracle, and governance deployment assumptions.
 
 Load local references as needed:

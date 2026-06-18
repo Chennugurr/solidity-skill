@@ -1,6 +1,6 @@
 {
   "name": "solidity-skill",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Vendor-neutral Solidity agent skill suite for building, auditing, testing, deploying, and specifying EVM smart contracts.",
   "author": {
     "name": "Chennugurr",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Solidity Skill",
     "shortDescription": "Build, audit, test, deploy, and specify Solidity contracts",
-    "longDescription": "A Solidity agent skill suite with nine focused Markdown skills for smart contract building, security review, Foundry testing, EVM deployment, DeFi accounting, Uniswap v4 hooks, upgradeable contracts, token launches, and protocol specifications. Includes validation scripts, upload packaging, release assets, and compile-checked Solidity templates.",
+    "longDescription": "A Solidity agent skill suite with nine focused Markdown skills for smart contract building, security review, Foundry testing, EVM deployment, DeFi accounting, Uniswap v4 hooks, upgradeable contracts, token launches, and protocol specifications. Includes validation scripts, upload packaging, release assets, security-tool configs, gas and access-management references, and compile-checked Solidity templates.",
     "developerName": "Chennugurr",
     "category": "Developer Tools",
     "capabilities": [

@@ -49,10 +49,12 @@ Keep this file in context first. Load references only when needed:
 - `../../shared/references/openzeppelin-defaults.md`: consult when selecting standard primitives, roles, token transfer helpers, or upgradeable variants.
 - `../../shared/references/foundry-conventions.md`: consult when creating a project layout, Foundry tests, deployment scripts, README content, or verification notes.
 - `../../shared/references/mainnet-readiness.md`: consult before making production or mainnet-readiness claims.
+- `../../shared/references/gas-optimization.md`: consult after correctness and tests are in place, especially when the user asks for gas work.
+- `../../shared/references/access-management.md`: consult for AccessManager, role-delay, admin handoff, or emergency-role design.
 - `../../shared/references/advanced-protocols.md`: consult for signatures, permits, oracles, account abstraction, bridges, L2s, and governance operations.
 - `references/contract-patterns.md`: consult for ERC20, NFT, staking, rewards, vault, vesting, escrow, treasury, governance, AMM, Uniswap v4 hook, and bridge-specific rules.
 
-Use `templates/` as starting points when the user asks for concrete files or a scaffold. Available starter templates include ERC20, ERC721, ERC1155, ERC4626, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, deploy scripts, and CREATE2 deployment.
+Use `templates/` as starting points when the user asks for concrete files or a scaffold. Available starter templates include ERC20, ERC20Permit, ERC721, ERC2981, ERC1155, ERC6909, ERC4626, ERC1271, ERC3156 flash minting, AccessManager-managed ERC20, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, deploy scripts, and CREATE2 deployment.
 
 ## Default Standards
 

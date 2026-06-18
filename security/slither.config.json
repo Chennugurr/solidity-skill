@@ -1,0 +1,10 @@
+{
+  "filter_paths": "lib/|node_modules/|out/|cache/|broadcast/",
+  "exclude_dependencies": true,
+  "exclude_informational": true,
+  "exclude_low": false,
+  "exclude_medium": false,
+  "exclude_high": false,
+  "disable_color": true,
+  "solc_remaps": "@openzeppelin/=lib/openzeppelin-contracts/"
+}

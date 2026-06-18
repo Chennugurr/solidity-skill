@@ -6,7 +6,7 @@ It is intentionally vendor-neutral. The core skills are not tied to any single a
 
 This repository is also packaged as both a Codex plugin and a Claude Code plugin named `solidity-skill`. Product-specific plugin metadata lives in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
 
-Current suite target: `v1.0.0`.
+Current suite target: `v1.1-security-and-engineering`.
 
 ## What Is Included
 
@@ -27,7 +27,8 @@ Advanced skills:
 
 Shared support:
 
-- `shared/`: reusable security, Foundry, OpenZeppelin, security tooling, advanced protocol, and mainnet-readiness references.
+- `shared/`: reusable security, Foundry, OpenZeppelin, gas, access-management, security tooling, advanced protocol, and mainnet-readiness references.
+- `security/`: Slither and Echidna starter configs for security-tooling workflows.
 - `.codex-plugin/plugin.json`: Codex plugin manifest that loads the nine skills from `./skills/`.
 - `.claude-plugin/plugin.json`: Claude Code plugin manifest; Claude Code auto-discovers the root `skills/` directory.
 - `adapters/`: notes for using the skill suite with different agent environments.
@@ -104,7 +105,7 @@ See `docs/distribution.md` for the compatibility matrix and upload/release notes
 
 ## Template Coverage
 
-The builder skill includes compile-checked starter templates for ERC20, ERC721, ERC1155, ERC4626, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, and Foundry deploy scripts including CREATE2.
+The builder skill includes compile-checked starter templates for ERC20, ERC20Permit, ERC721, ERC2981, ERC1155, ERC6909, ERC4626, ERC1271, ERC3156 flash minting, AccessManager-managed ERC20, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, and Foundry deploy scripts including CREATE2.
 
 ## Skill Philosophy
 

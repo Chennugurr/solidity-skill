@@ -19,6 +19,14 @@ Advanced:
 
 ## Release Phases
 
+### v1.1 Security And Engineering
+
+- Add runnable security tool configs for Slither and Echidna.
+- Add a non-blocking Slither CI scan over a temporary Foundry template project.
+- Add gas optimization, AccessManager, and tool-output triage references.
+- Add compile-checked ERC20Permit, ERC2981, ERC1271, ERC3156, ERC6909, and AccessManager templates.
+- Keep the public nine-skill interface stable.
+
 ### v0.2.0 Quality Foundation
 
 - Add suite validation for skill frontmatter, paths, examples, manifests, upload zips, and vendor-neutral reusable content.
@@ -46,6 +54,27 @@ Advanced:
 - Add release asset packaging for upload zips, source archive, and checksums.
 - Document Codex, Claude Code, ChatGPT upload, Cursor, and generic Markdown-agent compatibility.
 - Freeze the public nine-skill interface unless a new skill is clearly justified.
+
+### v1.2 Account Abstraction
+
+- Add `account-abstraction-engineer` as a new tenth skill.
+- Cover ERC-4337 smart accounts, EntryPoint assumptions, bundlers, paymasters, EIP-7702, and EOA delegation.
+
+### v1.3 Oracle, L2, Cross-Chain, And MEV
+
+- Add oracle integration references for Chainlink, Pyth, RedStone, stale prices, decimals, and L2 sequencer checks.
+- Add L2/cross-chain deployment references for bridge trust, verification differences, CREATE2, and replay protection.
+- Add MEV and market-mechanics guidance for slippage, deadlines, sandwich risk, TWAP windows, auctions, commit-reveal, and liquidations.
+
+### v1.4 Full Example Projects
+
+- Add complete Foundry example projects under `examples/projects/`.
+- Include ERC20 launch, ERC4626 vault, staking rewards, upgradeable proxy, and governance/timelock examples.
+- Each project should include contracts, tests, scripts, README, and audit notes.
+
+### v1.5 Public Release
+
+- Publish a GitHub release with upload zips, source zip, checksums, and release notes.
 
 ## Quality Goals
 

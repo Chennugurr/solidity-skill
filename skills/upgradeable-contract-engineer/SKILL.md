@@ -33,6 +33,7 @@ Load shared references as needed:
 - `../../shared/references/openzeppelin-defaults.md` for upgradeable defaults.
 - `../../shared/references/security-posture.md` for admin trust and initialization risks.
 - `../../shared/references/mainnet-readiness.md` for production upgrade gates.
+- `../../shared/references/access-management.md` for upgrade authority, role delays, admin handoff, and emergency roles.
 - `../../shared/references/advanced-protocols.md` for timelock, governance, L2, bridge, and account-abstraction interactions with upgrades.
 
 Load local references as needed:

@@ -34,6 +34,8 @@ Load shared references as needed:
 - `../../shared/references/openzeppelin-defaults.md` for standard primitive expectations.
 - `../../shared/references/mainnet-readiness.md` for production-readiness claims.
 - `../../shared/references/security-tooling.md` when reviewing or recommending Slither, Echidna, SMTChecker, or formal/property tooling.
+- `../../shared/references/tool-output-triage.md` when classifying automated analysis findings.
+- `../../shared/references/access-management.md` when reviewing role, AccessManager, timelock, or admin handoff risk.
 - `../../shared/references/advanced-protocols.md` for signatures, oracles, account abstraction, bridges, L2s, and governance operations.
 
 Load local references as needed:

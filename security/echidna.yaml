@@ -1,0 +1,10 @@
+testMode: assertion
+testLimit: 50000
+seqLen: 100
+shrinkLimit: 5000
+coverage: true
+corpusDir: corpus
+cryticArgs:
+  - "--foundry-compile-all"
+filterBlacklist: false
+filterFunctions: []

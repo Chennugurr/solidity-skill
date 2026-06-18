@@ -33,13 +33,14 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for security-relevant edge cases.
 - `../../shared/references/mainnet-readiness.md` for production test expectations.
 - `../../shared/references/security-tooling.md` for when Foundry fuzz/invariants should be escalated to external property or formal tools.
+- `../../shared/references/gas-optimization.md` when adding gas snapshots or preventing gas regressions.
 
 Load local references as needed:
 
 - `references/unit-fuzz-invariant.md` for test strategy.
 - `references/fork-and-deploy-tests.md` for integration and script tests.
 
-Use templates in `templates/` when the user asks for test files or examples.
+Use templates in `templates/` when the user asks for test files or examples, including `templates/SecurityInvariantHarness.t.sol` for value-flow invariant harnesses.
 
 ## Test Design Rules
 

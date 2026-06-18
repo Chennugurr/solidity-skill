@@ -38,6 +38,7 @@ Recommended split:
 - `examples/`: sample prompts and expected behavior.
 - `adapters/`: product-specific usage notes.
 - `shared/references/`: reusable guidance that applies to more than one skill.
+- `security/`: optional tool configs and security-analysis helpers used by the suite.
 
 ## Vendor Neutrality
 
@@ -74,6 +75,8 @@ The repository keeps related Solidity skills together but independently loadable
 - Advanced: DeFi accounting, Uniswap v4 hooks, upgradeability, token launches, protocol specs.
 
 Use shared references for common rules. Do not duplicate long safety or Foundry guidance inside each skill.
+
+Security tool configs live outside individual skills so the suite can reuse them without turning any one skill into a project scaffold.
 
 ## Plugin Packaging
 
