@@ -1,0 +1,10 @@
+{
+  "name": "solidity-skill-upgrade-validation",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Pinned dry-run validation tooling for the upgradeable example",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/upgrades-core": "1.46.0"
+  }
+}

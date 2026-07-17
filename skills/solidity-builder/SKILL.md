@@ -51,7 +51,11 @@ Keep this file in context first. Load references only when needed:
 - `../../shared/references/mainnet-readiness.md`: consult before making production or mainnet-readiness claims.
 - `../../shared/references/gas-optimization.md`: consult after correctness and tests are in place, especially when the user asks for gas work.
 - `../../shared/references/access-management.md`: consult for AccessManager, role-delay, admin handoff, or emergency-role design.
-- `../../shared/references/advanced-protocols.md`: consult for signatures, permits, oracles, account abstraction, bridges, L2s, and governance operations.
+- `../../shared/references/signatures.md`: consult for EIP-712, permits, contract wallets, nonces, and replay protection.
+- `../../shared/references/oracle-safety.md`: consult when contract behavior depends on external prices or rates.
+- `../../shared/references/cross-chain-l2.md`: consult for messaging, bridges, and L2-specific behavior.
+- `../../shared/references/modern-evm.md`: consult before using transient storage, delegated EOAs, or recent EVM targets.
+- `../../shared/references/reproducible-builds.md`: consult for compiler settings, dependency locks, and verified artifacts.
 - `references/contract-patterns.md`: consult for ERC20, NFT, staking, rewards, vault, vesting, escrow, treasury, governance, AMM, Uniswap v4 hook, and bridge-specific rules.
 
 Use `templates/` as starting points when the user asks for concrete files or a scaffold. Available starter templates include ERC20, ERC20Permit, ERC721, ERC2981, ERC1155, ERC6909, ERC4626, ERC1271, ERC3156 flash minting, AccessManager-managed ERC20, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, deploy scripts, and CREATE2 deployment.

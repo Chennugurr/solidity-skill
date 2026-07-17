@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIST_DIR = ROOT / "dist"
 SOURCE_ZIP = DIST_DIR / "solidity-agent-skills-source.zip"
-EXCLUDED_DIRS = {".git", "dist", "out", "cache", "broadcast", "node_modules", "lib"}
+EXCLUDED_DIRS = {".git", "dist", "out", "cache", "broadcast", "node_modules", "dependencies", "lib"}
 
 
 def should_include(path: Path) -> bool:

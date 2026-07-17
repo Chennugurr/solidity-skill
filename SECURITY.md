@@ -14,8 +14,16 @@ Any contract generated with these skills must still go through:
 - Fork tests for external protocol integrations.
 - Deployment rehearsal on testnets or local forks.
 - Independent security review or audit before mainnet.
+- Operational runbooks, signer review, monitoring, and incident rehearsal.
+- Qualified legal review for regulated assets, transfer restrictions, and RWA workflows.
 
 Generated Solidity should be treated as a draft until reviewed and tested. Never assume a generated contract is production-ready because it followed this skill.
+
+Formal verification establishes only the checked properties under the stated
+model and assumptions. It does not prove that a specification is complete or
+that integrations, governance, operations, or economics are safe. Likewise,
+passing CI, static analysis, fuzzing, or invariant tests is evidence, not a
+security guarantee.
 
 ## What To Report
 
@@ -26,6 +34,7 @@ Please report security issues in this repository when they involve:
 - Guidance that enables hidden owner powers, honeypots, backdoors, or deceptive token behavior.
 - Misleading security language.
 - A reference pattern that could cause user funds to be lost.
+- A broken validation, packaging, dependency-lock, or evaluation control that could hide unsafe guidance.
 
 Do not report every bug in a downstream generated contract as a vulnerability in this repository unless the bug comes from a template or instruction here.
 

@@ -28,6 +28,13 @@ Every `SKILL.md` must:
 - Keep instructions focused and practical.
 - Link to reference files instead of becoming a long manual.
 - Avoid assuming a specific agent vendor or runtime.
+- Define its expected output and role-appropriate safety rules.
+- Have a matching `examples/<skill-name>/README.md` prompt example and evaluation case.
+
+The twenty-skill public interface is frozen for v2. Propose a new public skill
+only when it has a distinct workflow, threat model, and enough focused material
+to justify an independently loaded role. Narrow standards and tool notes usually
+belong in references or templates.
 
 Example frontmatter:
 
@@ -49,6 +56,8 @@ description: Build and test secure Solidity smart contracts with safer defaults.
 - Keep product-specific instructions in `adapters/`.
 - Add sample prompts under `examples/` when a new workflow would benefit from them.
 - Add templates only when they are broadly reusable.
+- Pin compiler and dependencies in standalone projects and commit their locks.
+- Keep protocol-specialist templates bounded; do not present them as complete protocols.
 
 ## Pull Request Checklist
 
@@ -59,6 +68,9 @@ description: Build and test secure Solidity smart contracts with safer defaults.
 - Long reusable details are in `references/`.
 - Templates compile or are clearly marked as templates.
 - Example prompts are realistic and do not request deceptive behavior.
+- `python3 scripts/validate-suite.py --package --compile-templates` passes.
+- Standalone project changes pass `python3 scripts/test-example-projects.py`.
+- Evaluation changes pass `python3 scripts/run-skill-evals.py --replay-baselines`.
 
 ## Reporting Problems
 

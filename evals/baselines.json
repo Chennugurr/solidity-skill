@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "results": {
+    "builder-fixed-supply": {
+      "response": "Drafted an ERC20 with focused tests. Treat it as a draft requiring review and an independent audit before production use.",
+      "files": {"src/Token.sol": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.36;\ncontract Token {}\n"}
+    },
+    "auditor-access-review": {
+      "response": "Each finding records severity, impact, evidence, and a concrete recommendation. Residual risk remains after remediation.",
+      "files": {}
+    },
+    "foundry-invariants": {
+      "response": "Start with unit and fuzz tests, then use a bounded handler to exercise the accounting invariant across call sequences.",
+      "files": {}
+    },
+    "deployment-runbook": {
+      "response": "Run a dry-run simulation, verify bytecode and constructor inputs, then complete post-deploy role and configuration checks.",
+      "files": {}
+    },
+    "defi-share-accounting": {
+      "response": "Define share conversion and rounding direction at every boundary, then test the conservation and solvency invariant.",
+      "files": {}
+    },
+    "v4-hook-permissions": {
+      "response": "Derive hook permission bits, constrain PoolManager callbacks, and test unauthorized and adversarial callback paths.",
+      "files": {}
+    },
+    "upgrade-storage": {
+      "response": "Append the field without disturbing the storage layout, protect the initializer, and validate V2 against the V1 reference build.",
+      "files": {}
+    },
+    "token-disclosure": {
+      "response": "Document allocation and vesting, define liquidity controls, and disclose every admin role and handoff condition.",
+      "files": {}
+    },
+    "protocol-spec": {
+      "response": "List each actor, flow, trust assumption, invariant, and testable acceptance criteria before implementation.",
+      "files": {}
+    },
+    "aa-paymaster": {
+      "response": "Pin the EntryPoint version, validate every UserOperation field, and bound paymaster eligibility, spend, and expiry.",
+      "files": {}
+    },
+    "oracle-normalization": {
+      "response": "Normalize decimal scales, reject stale updates, enforce confidence bounds, and gate L2 use on the sequencer grace period.",
+      "files": {}
+    },
+    "operations-incident": {
+      "response": "Inventory each role, review the Safe batch byte-for-byte, and define incident authority, communication, and recovery evidence.",
+      "files": {}
+    },
+    "formal-properties": {
+      "response": "State each assumption and property explicitly; triage every counterexample and report the bounded verification coverage.",
+      "files": {}
+    },
+    "cross-chain-replay": {
+      "response": "Bind replay protection to source domain and nonce, model finality explicitly, and make retry behavior idempotent.",
+      "files": {}
+    },
+    "lending-liquidation": {
+      "response": "Specify the health factor, liquidation incentive, close factor, oracle dependency, and bad debt settlement path.",
+      "files": {}
+    },
+    "stablecoin-shutdown": {
+      "response": "Document collateral valuation, peg mechanism, reserve assumptions, and a deterministic emergency shutdown and redemption flow.",
+      "files": {}
+    },
+    "perps-funding": {
+      "response": "Define signed funding accrual, initial and maintenance margin, liquidation ordering, and bankruptcy loss allocation.",
+      "files": {}
+    },
+    "intent-settlement": {
+      "response": "Bind domain, nonce, deadline, assets, receiver, and partial fill accounting so replay across fills or chains is rejected.",
+      "files": {}
+    },
+    "staking-withdrawals": {
+      "response": "Snapshot shares into a withdrawal queue, respect unbond timing, and define how slashing affects queued claims.",
+      "files": {}
+    },
+    "rwa-transfer-controls": {
+      "response": "Make each allowlist and freeze action auditable. Transfer policy requires independent security review and qualified legal review.",
+      "files": {}
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "chainId": "0",
+  "createdAt": 0,
+  "meta": {
+    "name": "Reviewed transaction batch",
+    "description": "Replace placeholders, decode every call, and dry-run from the Safe before approval"
+  },
+  "transactions": []
+}

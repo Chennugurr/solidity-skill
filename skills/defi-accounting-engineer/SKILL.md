@@ -33,7 +33,10 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for accounting and value-flow risks.
 - `../../shared/references/openzeppelin-defaults.md` for ERC4626 and token transfer defaults.
 - `../../shared/references/foundry-conventions.md` for invariant test conventions.
-- `../../shared/references/advanced-protocols.md` for oracle normalization, cross-chain assumptions, and governance-controlled accounting updates.
+- `../../shared/references/oracle-safety.md` for normalization, freshness, confidence, and fallback accounting.
+- `../../shared/references/mev-market-mechanics.md` for liquidation ordering, auctions, slippage, and market execution.
+- `../../shared/references/cross-chain-l2.md` for delayed or replicated accounting across chains.
+- `../../shared/references/protocol-operations.md` for governance-controlled accounting updates and emergency procedures.
 
 Load local references as needed:
 

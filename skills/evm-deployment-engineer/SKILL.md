@@ -34,7 +34,10 @@ Load shared references as needed:
 - `../../shared/references/mainnet-readiness.md` for deployment gates.
 - `../../shared/references/security-posture.md` for privileged role and secret handling.
 - `../../shared/references/access-management.md` for role setup, AccessManager configuration, admin handoff, and emergency powers.
-- `../../shared/references/advanced-protocols.md` for CREATE2, L2, bridge, oracle, and governance deployment assumptions.
+- `../../shared/references/reproducible-builds.md` for pinned settings, bytecode comparison, and verification.
+- `../../shared/references/cross-chain-l2.md` for L2, bridge, finality, and chain-specific deployment assumptions.
+- `../../shared/references/oracle-safety.md` for feed addresses, sequencer dependencies, and monitoring.
+- `../../shared/references/protocol-operations.md` for Safe execution, role handoff, address books, and postchecks.
 
 Load local references as needed:
 

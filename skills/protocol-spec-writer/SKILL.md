@@ -32,6 +32,10 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for assumptions and trust boundaries.
 - `../../shared/references/openzeppelin-defaults.md` for standard primitives.
 - `../../shared/references/mainnet-readiness.md` for production gates.
+- `../../shared/references/oracle-safety.md` when the protocol consumes prices or rates.
+- `../../shared/references/cross-chain-l2.md` for cross-domain flows, finality, and recovery.
+- `../../shared/references/protocol-operations.md` for roles, emergency actions, monitoring, and handoff criteria.
+- `../../shared/references/signatures.md` for signed messages, permits, intents, or delegation.
 
 Load local references as needed:
 
@@ -80,4 +84,3 @@ Use `templates/ProtocolSpec.md` when creating a full spec.
 ## Safety Rule
 
 Do not smooth over missing custody, oracle, upgrade, or admin assumptions. Surface them before implementation.
-

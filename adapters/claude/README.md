@@ -6,7 +6,7 @@ This repository also includes a Claude Code plugin manifest at `.claude-plugin/p
 
 ## Recommended Use
 
-1. Choose the skill that matches the task, such as `solidity-builder`, `solidity-auditor`, or `foundry-test-writer`.
+1. Choose one of the twenty skills that matches the task, such as `solidity-builder`, `oracle-integration-engineer`, or `formal-verification-engineer`.
 2. Add or attach that skill's `SKILL.md` to the relevant project or conversation context.
 3. Keep the skill's `references/`, `templates/`, and `shared/references/` available.
 4. Ask Claude to load only the reference files needed for the task.
@@ -37,3 +37,4 @@ Review these contracts and consult shared/references/security-posture.md before 
 - For long-running projects, keep this repository checked into the workspace so references and templates remain available.
 - Use `python3 scripts/package-upload-skills.py` if you need one zip per skill for an upload UI.
 - Use `docs/distribution.md` for the compatibility matrix.
+- The plugin ships skills only: no commands, agents, hooks, MCP servers, or marketplace metadata.

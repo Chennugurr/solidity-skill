@@ -1,0 +1,14 @@
+{
+  "chainId": 0,
+  "updatedAt": "YYYY-MM-DDTHH:MM:SSZ",
+  "contracts": [
+    {
+      "name": "ContractName",
+      "address": "0x0000000000000000000000000000000000000000",
+      "runtimeCodeHash": "0x",
+      "deploymentTransaction": "0x",
+      "implementation": null,
+      "admin": null
+    }
+  ]
+}

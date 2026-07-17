@@ -34,7 +34,10 @@ Load shared references as needed:
 - `../../shared/references/security-posture.md` for admin trust and initialization risks.
 - `../../shared/references/mainnet-readiness.md` for production upgrade gates.
 - `../../shared/references/access-management.md` for upgrade authority, role delays, admin handoff, and emergency roles.
-- `../../shared/references/advanced-protocols.md` for timelock, governance, L2, bridge, and account-abstraction interactions with upgrades.
+- `../../shared/references/modern-evm.md` for namespaced storage, compiler targets, and EIP-7702 redelegation.
+- `../../shared/references/reproducible-builds.md` for storage-layout artifacts and bytecode verification.
+- `../../shared/references/protocol-operations.md` for upgrade batches, dry-runs, monitoring, and incident response.
+- `../../shared/references/cross-chain-l2.md` for chain-specific and cross-domain upgrade assumptions.
 
 Load local references as needed:
 

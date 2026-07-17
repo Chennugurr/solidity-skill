@@ -36,7 +36,12 @@ Load shared references as needed:
 - `../../shared/references/security-tooling.md` when reviewing or recommending Slither, Echidna, SMTChecker, or formal/property tooling.
 - `../../shared/references/tool-output-triage.md` when classifying automated analysis findings.
 - `../../shared/references/access-management.md` when reviewing role, AccessManager, timelock, or admin handoff risk.
-- `../../shared/references/advanced-protocols.md` for signatures, oracles, account abstraction, bridges, L2s, and governance operations.
+- `../../shared/references/signatures.md` for typed-data, contract-wallet, delegation, nonce, and replay review.
+- `../../shared/references/oracle-safety.md` for source, freshness, confidence, sequencer, and fallback review.
+- `../../shared/references/cross-chain-l2.md` for authenticated messaging, finality, replay, and bridge trust.
+- `../../shared/references/modern-evm.md` for compiler-target, transient-storage, namespace, and delegated-EOA assumptions.
+- `../../shared/references/mev-market-mechanics.md` for ordering, slippage, auctions, liquidations, and solver risk.
+- `../../shared/references/protocol-operations.md` for privileged execution, monitoring, and incident readiness.
 
 Load local references as needed:
 

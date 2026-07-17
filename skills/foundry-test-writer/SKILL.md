@@ -34,6 +34,9 @@ Load shared references as needed:
 - `../../shared/references/mainnet-readiness.md` for production test expectations.
 - `../../shared/references/security-tooling.md` for when Foundry fuzz/invariants should be escalated to external property or formal tools.
 - `../../shared/references/gas-optimization.md` when adding gas snapshots or preventing gas regressions.
+- `../formal-verification-engineer/references/property-workflow.md` when invariants should be escalated into symbolic or formal properties.
+- `../../shared/references/oracle-safety.md` for oracle and sequencer failure-path tests.
+- `../../shared/references/cross-chain-l2.md` for message replay, finality, and recovery tests.
 
 Load local references as needed:
 

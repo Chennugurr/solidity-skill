@@ -32,6 +32,7 @@ Load shared references as needed:
 
 - `../../shared/references/security-posture.md` for manipulation, oracle, and accounting risks.
 - `../../shared/references/foundry-conventions.md` for test structure.
+- `../../shared/references/mev-market-mechanics.md` when hook behavior changes execution price, ordering, auctions, or liquidation incentives.
 
 Load local references as needed:
 
@@ -74,4 +75,3 @@ Use `templates/HookDesignChecklist.md` for design reviews.
 ## Safety Rule
 
 If the hook's economics depend on price, liquidity, or volume data, treat same-block and same-transaction manipulation as a first-class risk.
-

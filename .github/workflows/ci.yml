@@ -16,7 +16,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
+
+      - name: Install Python validation dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            security/upgrade-validation/package-lock.json
+            examples/projects/oracle-lending-market/package-lock.json
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -26,9 +38,42 @@ jobs:
       - name: Validate suite
         run: python3 scripts/validate-suite.py --package --compile-templates
 
+      - name: Test standalone Foundry projects
+        run: python3 scripts/test-example-projects.py
+
+      - name: Validate UUPS upgrade and storage layout
+        run: python3 scripts/run-upgrade-validation.py
+
       - name: Install Slither
         run: python3 -m pip install slither-analyzer
 
       - name: Run Slither template scan
         run: python3 scripts/run-slither-template-check.py
         continue-on-error: true
+
+  formal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install formal tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y z3
+          python3 -m pip install halmos==0.3.3 solc-select
+          solc-select install 0.8.36
+          solc-select use 0.8.36
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          cache: true
+
+      - name: Run SMTChecker and Halmos examples
+        run: python3 scripts/run-formal-checks.py

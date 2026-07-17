@@ -11,8 +11,11 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import zipfile
 from pathlib import Path
+
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,8 +24,17 @@ SHARED_DIR = ROOT / "shared"
 DIST_DIR = ROOT / "dist"
 
 SKILL_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-PATH_RE = re.compile(r"`([^`]+(?:\.md|\.sol|\.json|\.yml|\.yaml|\.py))`")
+PATH_RE = re.compile(r"`([^`]+(?:\.md|\.sol|\.json|\.yml|\.yaml|\.toml|\.lock|\.spec|\.conf|\.py))`")
+MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 VENDOR_TERMS = ("Codex", "Claude", "Cursor", "ChatGPT")
+EXCLUDED_PARTS = {".git", "dist", "out", "cache", "broadcast", "node_modules", "dependencies", "lib"}
+EXPECTED_PROJECTS = {
+    "erc4626-vault",
+    "upgradeable-staking",
+    "erc4337-smart-account",
+    "oracle-lending-market",
+    "governance-timelock",
+}
 
 
 class SuiteError(Exception):
@@ -39,15 +51,10 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
     except ValueError as exc:
         raise SuiteError(f"{path.relative_to(ROOT)} has invalid YAML frontmatter fence") from exc
 
-    data: dict[str, str] = {}
-    for line in raw.strip().splitlines():
-        if not line.strip() or line.lstrip().startswith("#"):
-            continue
-        if ":" not in line:
-            raise SuiteError(f"{path.relative_to(ROOT)} has invalid frontmatter line: {line}")
-        key, value = line.split(":", 1)
-        data[key.strip()] = value.strip().strip('"').strip("'")
-    return data
+    data = yaml.safe_load(raw)
+    if not isinstance(data, dict):
+        raise SuiteError(f"{path.relative_to(ROOT)} frontmatter must be a YAML mapping")
+    return {str(key): str(value) for key, value in data.items()}
 
 
 def skill_dirs() -> list[Path]:
@@ -78,6 +85,17 @@ def validate_skills() -> set[str]:
         "upgradeable-contract-engineer",
         "token-launch-builder",
         "protocol-spec-writer",
+        "account-abstraction-engineer",
+        "oracle-integration-engineer",
+        "protocol-operations-engineer",
+        "formal-verification-engineer",
+        "cross-chain-l2-engineer",
+        "lending-liquidation-engineer",
+        "stablecoin-engineer",
+        "perpetuals-funding-engineer",
+        "intent-solver-engineer",
+        "staking-restaking-engineer",
+        "rwa-token-engineer",
     }
     if names != expected:
         missing = ", ".join(sorted(expected - names)) or "none"
@@ -95,7 +113,7 @@ def resolve_reference(source: Path, reference: str) -> Path | None:
         reference = reference[2:]
     if reference.startswith("../") or reference.startswith("references/") or reference.startswith("templates/"):
         return (source.parent / reference).resolve()
-    if reference.startswith(("skills/", "shared/", "security/", "adapters/", "examples/", "docs/", "scripts/", ".github/")):
+    if reference.startswith(("skills/", "shared/", "security/", "adapters/", "examples/", "evals/", "docs/", "scripts/", ".github/")):
         return (ROOT / reference).resolve()
     if reference.startswith((".codex-plugin/", ".claude-plugin/")):
         return (ROOT / reference).resolve()
@@ -104,19 +122,11 @@ def resolve_reference(source: Path, reference: str) -> Path | None:
 
 def validate_referenced_paths() -> None:
     checked_files = [
-        *ROOT.glob("*.md"),
-        *ROOT.glob(".*-plugin/*.json"),
-        *ROOT.glob("adapters/*/*.md"),
-        *ROOT.glob("docs/*.md"),
-        *ROOT.glob("security/*.md"),
-        *ROOT.glob("security/*.json"),
-        *ROOT.glob("security/*.yaml"),
-        *ROOT.glob("examples/*/*.md"),
-        *ROOT.glob("skills/*/SKILL.md"),
-        *ROOT.glob("skills/*/README.md"),
-        *ROOT.glob("skills/*/references/*.md"),
-        *ROOT.glob("shared/*.md"),
-        *ROOT.glob("shared/references/*.md"),
+        path
+        for path in ROOT.rglob("*")
+        if path.is_file()
+        and not EXCLUDED_PARTS.intersection(path.relative_to(ROOT).parts)
+        and path.suffix in {".md", ".json", ".yaml", ".yml", ".toml", ".conf"}
     ]
 
     missing: list[str] = []
@@ -133,16 +143,106 @@ def validate_referenced_paths() -> None:
                 continue
             if not target.exists():
                 missing.append(f"{source.relative_to(ROOT)} -> {ref}")
+        for match in MARKDOWN_LINK_RE.finditer(text):
+            ref = match.group(1).strip().split("#", 1)[0]
+            if not ref or "://" in ref or ref.startswith(("mailto:", "#")):
+                continue
+            target = (source.parent / ref).resolve()
+            try:
+                target.relative_to(ROOT)
+            except ValueError:
+                continue
+            if not target.exists():
+                missing.append(f"{source.relative_to(ROOT)} -> {ref}")
 
     if missing:
         raise SuiteError("Missing referenced paths:\n" + "\n".join(sorted(missing)))
 
 
 def validate_examples(skill_names: set[str]) -> None:
-    for readme in sorted((ROOT / "examples").glob("*/README.md")):
-        text = readme.read_text(encoding="utf-8")
-        if not any(name in text for name in skill_names):
-            raise SuiteError(f"{readme.relative_to(ROOT)} does not mention an existing skill")
+    covered: set[str] = set()
+    for name in skill_names:
+        readme = ROOT / "examples" / name / "README.md"
+        if not readme.is_file():
+            raise SuiteError(f"Missing prompt example for {name}")
+        if name not in readme.read_text(encoding="utf-8"):
+            raise SuiteError(f"{readme.relative_to(ROOT)} does not mention {name}")
+        covered.add(name)
+    if covered != skill_names:
+        raise SuiteError("Example prompt coverage does not match the public skills")
+
+
+def validate_structured_assets() -> None:
+    for path in sorted(ROOT.rglob("*")):
+        if not path.is_file() or EXCLUDED_PARTS.intersection(path.relative_to(ROOT).parts):
+            continue
+        text = path.read_text(encoding="utf-8")
+        try:
+            if path.suffix == ".json" or path.name == "certora.conf":
+                json.loads(text)
+            elif path.suffix in {".yaml", ".yml"}:
+                yaml.safe_load(text)
+            elif path.suffix == ".toml" or path.name.endswith(".lock"):
+                tomllib.loads(text)
+        except (json.JSONDecodeError, yaml.YAMLError, tomllib.TOMLDecodeError) as exc:
+            raise SuiteError(f"Invalid structured asset {path.relative_to(ROOT)}: {exc}") from exc
+
+
+def validate_evaluations(skill_names: set[str]) -> None:
+    cases = json.loads((ROOT / "evals" / "cases.json").read_text(encoding="utf-8"))
+    baselines = json.loads((ROOT / "evals" / "baselines.json").read_text(encoding="utf-8"))
+    case_names = {case["skill"] for case in cases.get("cases", [])}
+    case_ids = {case["id"] for case in cases.get("cases", [])}
+    if case_names != skill_names:
+        raise SuiteError("Evaluation cases must cover each public skill exactly once")
+    if set(baselines.get("results", {})) != case_ids:
+        raise SuiteError("Stored evaluation baselines do not match case ids")
+    subprocess.run([sys.executable, "scripts/run-skill-evals.py", "--validate-only"], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, "scripts/run-skill-evals.py", "--replay-baselines"], cwd=ROOT, check=True)
+
+
+def validate_example_projects() -> None:
+    projects_root = ROOT / "examples" / "projects"
+    actual = {path.name for path in projects_root.iterdir() if path.is_dir()}
+    if actual != EXPECTED_PROJECTS:
+        raise SuiteError(f"Unexpected standalone project set: {sorted(actual)}")
+
+    for name in sorted(EXPECTED_PROJECTS):
+        project = projects_root / name
+        required = ("README.md", "AUDIT_NOTES.md", "foundry.toml", "soldeer.lock", "src", "test", "script")
+        for relative in required:
+            if not (project / relative).exists():
+                raise SuiteError(f"{project.relative_to(ROOT)} is missing {relative}")
+        config = tomllib.loads((project / "foundry.toml").read_text(encoding="utf-8"))
+        profile = config.get("profile", {}).get("default", {})
+        dependencies = config.get("dependencies", {})
+        if profile.get("solc_version") != "0.8.36":
+            raise SuiteError(f"{name} must pin Solidity 0.8.36")
+        if dependencies.get("forge-std") != "1.16.2":
+            raise SuiteError(f"{name} must pin forge-std 1.16.2")
+
+        test_text = "\n".join(path.read_text(encoding="utf-8") for path in (project / "test").glob("*.sol"))
+        for pattern, label in (
+            (r"function test", "unit"),
+            (r"function testFuzz", "fuzz"),
+            (r"function invariant(?:_|[A-Z])", "invariant"),
+        ):
+            if re.search(pattern, test_text) is None:
+                raise SuiteError(f"{name} is missing {label} test coverage")
+        if not any((project / "src").glob("*.sol")) or not any((project / "script").glob("*.sol")):
+            raise SuiteError(f"{name} must include contracts and scripts")
+
+    oracle_package = json.loads(
+        (projects_root / "oracle-lending-market" / "package.json").read_text(encoding="utf-8")
+    )["dependencies"]
+    expected_provider_versions = {
+        "@chainlink/contracts": "1.5.0",
+        "@openzeppelin/contracts": "5.6.1",
+        "@pythnetwork/pyth-sdk-solidity": "4.3.1",
+        "@redstone-finance/evm-connector": "0.9.0",
+    }
+    if oracle_package != expected_provider_versions:
+        raise SuiteError("Oracle example provider dependencies are not pinned to the v2 set")
 
 
 def validate_vendor_neutral_core() -> None:
@@ -169,6 +269,8 @@ def validate_plugin_manifests() -> None:
                 raise SuiteError(f"{path.relative_to(ROOT)} missing {field}")
         if data["name"] != "solidity-skill":
             raise SuiteError(f"{path.relative_to(ROOT)} has unexpected plugin name")
+        if data["version"] != "2.0.0":
+            raise SuiteError(f"{path.relative_to(ROOT)} must use plugin version 2.0.0")
 
     codex = json.loads(codex_path.read_text(encoding="utf-8"))
     if codex.get("skills") != "./skills/":
@@ -230,9 +332,18 @@ def compile_templates() -> None:
 
     with tempfile.TemporaryDirectory(prefix="solidity-skill-foundry-") as temp_name:
         project = Path(temp_name)
-        subprocess.run(["forge", "init", "--no-git", "--quiet", "."], cwd=project, check=True)
+        for directory in ("src", "test", "script", "lib"):
+            (project / directory).mkdir()
+        (project / "foundry.toml").write_text(
+            '[profile.default]\nsolc_version = "0.8.36"\nevm_version = "cancun"\n', encoding="utf-8"
+        )
         subprocess.run(
-            ["forge", "install", "OpenZeppelin/openzeppelin-contracts", "--no-git", "--quiet"],
+            ["forge", "install", "foundry-rs/forge-std@v1.16.2", "--no-git", "--quiet"],
+            cwd=project,
+            check=True,
+        )
+        subprocess.run(
+            ["forge", "install", "OpenZeppelin/openzeppelin-contracts@v5.6.1", "--no-git", "--quiet"],
             cwd=project,
             check=True,
         )
@@ -258,6 +369,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--package", action="store_true", help="rebuild and inspect ChatGPT upload zips")
     parser.add_argument("--compile-templates", action="store_true", help="compile Solidity templates in a temp Foundry project")
+    parser.add_argument("--test-projects", action="store_true", help="install and test standalone Foundry projects")
+    parser.add_argument("--formal-tools", action="store_true", help="run blocking SMTChecker and Halmos examples")
+    parser.add_argument("--upgrade-validation", action="store_true", help="run OpenZeppelin upgrade validation")
     parser.add_argument(
         "--external-plugin-validators",
         action="store_true",
@@ -269,6 +383,9 @@ def main() -> int:
         skill_names = validate_skills()
         validate_referenced_paths()
         validate_examples(skill_names)
+        validate_structured_assets()
+        validate_evaluations(skill_names)
+        validate_example_projects()
         validate_vendor_neutral_core()
         validate_plugin_manifests()
         validate_security_configs()
@@ -276,9 +393,22 @@ def main() -> int:
             validate_packaged_zips()
         if args.compile_templates:
             compile_templates()
+        if args.test_projects:
+            subprocess.run([sys.executable, "scripts/test-example-projects.py"], cwd=ROOT, check=True)
+        if args.formal_tools:
+            subprocess.run([sys.executable, "scripts/run-formal-checks.py"], cwd=ROOT, check=True)
+        if args.upgrade_validation:
+            subprocess.run([sys.executable, "scripts/run-upgrade-validation.py"], cwd=ROOT, check=True)
         if args.external_plugin_validators:
             run_external_plugin_validators()
-    except (SuiteError, subprocess.CalledProcessError, json.JSONDecodeError, OSError) as exc:
+    except (
+        SuiteError,
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+        yaml.YAMLError,
+        tomllib.TOMLDecodeError,
+        OSError,
+    ) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 

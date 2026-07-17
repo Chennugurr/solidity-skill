@@ -1,128 +1,111 @@
-# solidity-agent-skills
+# Solidity Agent Skills
 
-`solidity-agent-skills` is a public open-source Solidity skill pack for coding agents that can consume Markdown instructions.
+`solidity-agent-skills` is a public, MIT-licensed suite of twenty independently
+loadable Solidity skills for coding agents that consume Markdown instructions.
+The reusable content is vendor-neutral; product-specific metadata and loading
+notes live only in plugin manifests and `adapters/`.
 
-It is intentionally vendor-neutral. The core skills are not tied to any single agent runtime. Product-specific notes live in `adapters/`, while the reusable skills live in `skills/`.
+The repository is both a Markdown skill pack and a plugin package named
+`solidity-skill` for supported Codex and Claude Code environments.
 
-This repository is also packaged as both a Codex plugin and a Claude Code plugin named `solidity-skill`. Product-specific plugin metadata lives in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`; the reusable skill content remains Markdown-first and vendor-neutral.
+Current release: `v2.0.0`.
 
-Current suite target: `v1.1-security-and-engineering`.
+## Skills
 
-## What Is Included
+Foundation:
 
-Core skills:
+- `solidity-builder`: contracts and bounded protocol components.
+- `solidity-auditor`: evidence-based security reviews and findings.
+- `foundry-test-writer`: unit, fuzz, invariant, fork, and deployment tests.
+- `evm-deployment-engineer`: simulations, verification, role setup, and runbooks.
 
-- `skills/solidity-builder/`: build and modify Solidity contracts.
-- `skills/solidity-auditor/`: review contracts, specs, tests, and deployments for security issues.
-- `skills/foundry-test-writer/`: write unit, fuzz, invariant, fork, and deployment tests.
-- `skills/evm-deployment-engineer/`: prepare deployment scripts, verification, role setup, and runbooks.
+Protocol engineering:
 
-Advanced skills:
+- `defi-accounting-engineer`: shares, rewards, fees, liquidations, and solvency.
+- `uniswap-v4-hook-engineer`: hook permissions, callbacks, and PoolManager tests.
+- `upgradeable-contract-engineer`: proxies, initialization, storage, and migrations.
+- `token-launch-builder`: transparent distribution, vesting, liquidity, and disclosure; begin with a dry-run plan.
+- `protocol-spec-writer`: actors, flows, invariants, assumptions, and acceptance criteria.
 
-- `skills/defi-accounting-engineer/`: design and review vault, reward, fee, liquidation, and solvency accounting.
-- `skills/uniswap-v4-hook-engineer/`: design, review, and test Uniswap v4 hooks.
-- `skills/upgradeable-contract-engineer/`: handle proxy patterns, storage layout, and upgrade plans.
-- `skills/token-launch-builder/`: build transparent token launch mechanics and disclosure checklists.
-- `skills/protocol-spec-writer/`: turn rough protocol ideas into implementation-ready specs.
+Production engineering:
 
-Shared support:
+- `account-abstraction-engineer`: ERC-4337 v0.9, ERC-7579, EIP-7702, paymasters, and signers.
+- `oracle-integration-engineer`: provider adapters, normalization, freshness, L2 checks, and fallbacks.
+- `protocol-operations-engineer`: Safe batches, roles, address books, monitoring, and incidents.
+- `formal-verification-engineer`: SMTChecker, Halmos, optional Certora, and counterexample triage.
+- `cross-chain-l2-engineer`: major L2 families, bridge assumptions, finality, replay, retries, and recovery.
 
-- `shared/`: reusable security, Foundry, OpenZeppelin, gas, access-management, security tooling, advanced protocol, and mainnet-readiness references.
-- `security/`: Slither and Echidna starter configs for security-tooling workflows.
-- `.codex-plugin/plugin.json`: Codex plugin manifest that loads the nine skills from `./skills/`.
-- `.claude-plugin/plugin.json`: Claude Code plugin manifest; Claude Code auto-discovers the root `skills/` directory.
-- `adapters/`: notes for using the skill suite with different agent environments.
-- `examples/`: sample prompts and expected usage patterns.
-- `docs/`: design notes and roadmap.
-- `scripts/validate-suite.py`: structural validation, packaging checks, manifest checks, and optional Solidity template compilation.
-- `.github/workflows/ci.yml`: GitHub Actions workflow for validation and template compilation.
+Protocol specialists:
+
+- `lending-liquidation-engineer`: interest, collateral, health, liquidation, bad debt, and solvency.
+- `stablecoin-engineer`: collateral models, peg controls, reserves, shutdown, and governance risk.
+- `perpetuals-funding-engineer`: margin, PnL, funding, bankruptcy, ADL, oracles, and keepers.
+- `intent-solver-engineer`: EIP-712 intents, Permit2, fills, settlement, replay, and MEV.
+- `staking-restaking-engineer`: delegation, shares, rewards, slashing, unbonding, and withdrawals.
+- `rwa-token-engineer`: restricted transfers, attestations, freezes, disclosures, and auditability.
+
+Every public entrypoint is `skills/<skill-name>/SKILL.md`. Shared references are
+loaded conditionally from `shared/references/`; they are not standalone skills.
 
 ## Quick Start
 
-1. Clone or copy this repository.
-2. Pick the skill that matches the job.
-3. Point your agent to that skill's `SKILL.md`.
-4. When a task needs deeper details, have the agent load the relevant files in that skill's `references/` and `shared/references/`.
-5. Use files in `templates/` as starting points when concrete artifacts are requested.
-
-Example prompt:
+1. Choose the narrowest skill that owns the task.
+2. Give the agent access to its `SKILL.md`, `references/`, and `templates/`.
+3. Keep `shared/references/` readable and load only the files the skill requests.
+4. Hand work between skills when the task crosses role boundaries.
 
 ```text
-Use the solidity-builder skill to create a fixed-supply ERC20 with Foundry tests and a deploy script.
+Use protocol-spec-writer to define this lending market, lending-liquidation-engineer
+to review its economics, foundry-test-writer to build invariants, and
+solidity-auditor to report residual risk.
 ```
 
-Skill handoff example:
+## Engineering Assets
 
-```text
-Use protocol-spec-writer to turn this idea into a spec, solidity-builder to implement it, foundry-test-writer to test it, solidity-auditor to review it, and evm-deployment-engineer to prepare deployment.
-```
+- `security/`: Slither, Echidna, and pinned upgrade-validation tooling.
+- `evals/`: one vendor-neutral prompt case and stored baseline per public skill.
+- `examples/projects/`: five standalone Foundry projects with exact dependency locks.
+- `scripts/`: suite validation, project tests, formal checks, packaging, and release assets.
+- `.github/workflows/ci.yml`: blocking structure, compile, project, upgrade, SMTChecker, and Halmos checks; Slither remains non-blocking for triage.
 
-## Codex Plugin
+The standalone projects cover an ERC4626 vault, UUPS staking migration, ERC-4337
+smart account, multi-provider oracle lending component, and Governor/Timelock
+workflow. They pin Solidity `0.8.36`, OpenZeppelin `5.6.1`, and forge-std `1.16.2`.
 
-The plugin manifest is intentionally small:
+## Validate
 
-- It declares the plugin name, version, metadata, and UI copy.
-- It points Codex at `./skills/`.
-- It does not include a CLI, MCP server, app manifest, hooks, icons, screenshots, or marketplace entry.
-
-The public skill entrypoints remain the nine `skills/<skill-name>/SKILL.md` files.
-
-## Claude Code Plugin
-
-The Claude Code plugin manifest is intentionally small:
-
-- It declares the plugin name, display name, version, metadata, and repository.
-- It relies on Claude Code's default root `skills/` discovery.
-- It does not include commands, agents, hooks, MCP servers, LSP servers, monitors, settings, or marketplace files.
-
-After installing or loading it in Claude Code, skills are namespaced under the plugin name, such as `/solidity-skill:solidity-builder`.
-
-## ChatGPT Skill Uploads
-
-Some skill upload UIs accept one skill at a time as a `.zip` with `SKILL.md` at the zip root. Generate those upload-ready archives with:
+Install the Python validation dependency, then run the complete local checks.
+Operational examples use dry-run or local execution unless explicitly configured.
 
 ```bash
-python3 scripts/package-upload-skills.py
+python3 -m pip install -r requirements-dev.txt
+python3 scripts/validate-suite.py --package --compile-templates --test-projects --formal-tools --upgrade-validation --external-plugin-validators
 ```
 
-This writes one zip per skill to `dist/`, including bundled shared references under `references/shared/`. For a first upload, use `dist/solidity-builder.zip`.
-
-## Validation And Release Assets
-
-Validate the suite locally:
+Run deterministic skill evaluations separately when iterating on prompts:
 
 ```bash
-python3 scripts/validate-suite.py --package --compile-templates --external-plugin-validators
+python3 scripts/run-skill-evals.py --replay-baselines
 ```
 
-Build GitHub release assets:
+## Distribution
 
-```bash
-python3 scripts/build-release-assets.py
-```
+- Codex plugin metadata: `.codex-plugin/plugin.json`
+- Claude Code plugin metadata: `.claude-plugin/plugin.json`
+- Cursor and generic loading notes: `adapters/`
+- Single-skill upload archives: `python3 scripts/package-upload-skills.py`
+- GitHub release assets and checksums: `python3 scripts/build-release-assets.py`
 
-See `docs/distribution.md` for the compatibility matrix and upload/release notes.
+The package intentionally has no CLI product, MCP server, app, hooks,
+marketplace entry, or installer. See `docs/distribution.md` for the compatibility
+matrix.
 
-## Template Coverage
+## Safety
 
-The builder skill includes compile-checked starter templates for ERC20, ERC20Permit, ERC721, ERC2981, ERC1155, ERC6909, ERC4626, ERC1271, ERC3156 flash minting, AccessManager-managed ERC20, staking rewards, Merkle claims, vesting, governance/timelock, votes tokens, Foundry tests, and Foundry deploy scripts including CREATE2.
+Templates, generated contracts, and example projects are educational drafts.
+Before production or mainnet use, pin the intended chain environment, run unit,
+fuzz, invariant, fork, and integration tests as applicable, review operational
+controls, obtain independent security review, and commission an audit when value
+or users are at risk. RWA work also requires qualified legal review.
 
-## Skill Philosophy
-
-This repository treats skills as compact, reusable operating instructions for AI coding agents. A skill should:
-
-- Prefer safe defaults over clever code.
-- State assumptions when requirements are incomplete.
-- Keep `SKILL.md` focused.
-- Move longer reference material into `references/`.
-- Avoid vendor-specific assumptions in the reusable skill body.
-- Treat generated smart contracts as drafts that require human review, tests, and audits before mainnet.
-- Keep each skill independently loadable instead of merging the suite into one giant prompt.
-
-## Safety Notice
-
-Generated contracts can contain bugs, incomplete assumptions, or unsafe economics. Before deploying any generated Solidity to mainnet, run tests, fuzz where useful, review access control, verify integrations, and get an independent security review or audit.
-
-## License
-
-MIT. See [LICENSE](LICENSE).
+See `SECURITY.md`, `CONTRIBUTING.md`, and the [MIT license](LICENSE).

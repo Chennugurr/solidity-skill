@@ -1,91 +1,59 @@
 # Skill Design
 
-This repository uses a simple, vendor-neutral skill format:
+The suite uses a vendor-neutral, progressively disclosed Markdown format:
 
 ```text
-shared/
+skills/<skill-name>/
+  SKILL.md
+  README.md
   references/
-skills/
-  skill-name/
-    SKILL.md
-    README.md
-    references/
-    templates/
+  templates/
+shared/references/
+examples/<skill-name>/README.md
 ```
 
-## Required Frontmatter
+## Public Contract
 
-Every `SKILL.md` must start with valid YAML frontmatter:
+Every public `SKILL.md` must start with valid YAML frontmatter whose `name`
+matches its directory and whose `description` states when the skill should be
+selected. The body must include when to use it, when not to use it, conditional
+reference loading, a bounded workflow, expected output, and role-appropriate
+safety language.
 
-```yaml
----
-name: skill-name
-description: Clear description of when and why to use the skill.
----
-```
+`SKILL.md` stays concise. Detailed rules belong in local references; guidance
+used by several skills belongs in `shared/references/`. Templates are concrete
+starting artifacts, not hidden instructions or claims of production readiness.
 
-The `name` should match the folder name.
+## Role Boundaries
 
-## Progressive Disclosure
+The twenty skills are grouped into foundation, protocol engineering, production
+engineering, and protocol-specialist roles. Keep them independently loadable and
+use explicit handoffs when work crosses ownership boundaries. Shared references
+are internal support files, not standalone skills.
 
-Keep `SKILL.md` short enough to load frequently. Put longer reusable material in `references/` and link to those files from the skill body.
-
-Recommended split:
-
-- `SKILL.md`: when to use the skill, core workflow, defaults, safety posture, output expectations.
-- `references/`: detailed domain rules, checklists, and patterns.
-- `templates/`: source files an agent can copy or adapt.
-- `examples/`: sample prompts and expected behavior.
-- `adapters/`: product-specific usage notes.
-- `shared/references/`: reusable guidance that applies to more than one skill.
-- `security/`: optional tool configs and security-analysis helpers used by the suite.
+Add a public skill only when the role has a distinct workflow and threat model.
+Narrow ERCs, EVM opcodes, tools, or provider notes normally remain references or
+templates.
 
 ## Vendor Neutrality
 
-Core skills should avoid product names and runtime assumptions. Product-specific instructions belong in `adapters/`.
-
-Acceptable in `SKILL.md`:
-
-- "Load this reference file when needed."
-- "Use Foundry by default for Solidity tests."
-- "State assumptions before writing code."
-
-Avoid in `SKILL.md`:
-
-- References to a single agent vendor.
-- Hardcoded local skill install paths.
-- Instructions that only work in one chat product.
+Reusable skill content may assume Markdown, project file access, Solidity, and
+the tools named by the workflow. It must not assume a particular agent vendor,
+installation path, chat surface, or plugin runtime. Product-specific loading
+instructions belong in `adapters/` or the relevant plugin manifest.
 
 ## Security Posture
 
-Solidity skills should assume real funds may depend on generated code. Skills should:
+Skills must expose assumptions and trust boundaries, use established libraries,
+test authorization and accounting, distinguish evidence from inference, and
+avoid claiming that tests or formal tools prove complete safety. Real deployment
+steps begin with simulation or dry-run output and require explicit human review.
 
-- Prefer established libraries.
-- Avoid hidden controls.
-- Explain trust assumptions.
-- Require tests for access control and accounting.
-- Avoid overclaiming security.
-- Recommend review and audits before mainnet.
+## Validation
 
-## Suite Organization
+The suite validator enforces the exact public set, YAML frontmatter, reference
+paths, examples, structured assets, evaluation coverage, project pins, plugin
+manifests, vendor neutrality, packaging, and optional compile/tool checks.
 
-The repository keeps related Solidity skills together but independently loadable:
-
-- Core: builder, auditor, Foundry test writer, deployment engineer.
-- Advanced: DeFi accounting, Uniswap v4 hooks, upgradeability, token launches, protocol specs.
-
-Use shared references for common rules. Do not duplicate long safety or Foundry guidance inside each skill.
-
-Security tool configs live outside individual skills so the suite can reuse them without turning any one skill into a project scaffold.
-
-## Plugin Packaging
-
-The repository can be installed as a Codex plugin through `.codex-plugin/plugin.json` and as a Claude Code plugin through `.claude-plugin/plugin.json`.
-
-Plugin manifests should stay thin:
-
-- Codex-specific metadata belongs in `.codex-plugin/plugin.json`.
-- Claude-specific metadata belongs in `.claude-plugin/plugin.json`.
-- Claude Code discovers the root `skills/` directory automatically.
-- The Markdown skills should remain reusable by non-Codex agents.
-- Do not add apps, MCP servers, hooks, agents, icons, logos, screenshots, settings, or marketplace files unless those assets or integrations actually exist.
+Plugin manifests remain thin. No app, MCP server, hooks, marketplace metadata,
+or installer belongs in the suite unless that integration is actually shipped.

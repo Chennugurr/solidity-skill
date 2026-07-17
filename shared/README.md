@@ -13,5 +13,12 @@ It is not a standalone skill. Do not load it by itself as a public entrypoint. I
 - `references/tool-output-triage.md`: classification rules for automated tool findings.
 - `references/gas-optimization.md`: gas measurement and optimization guidance.
 - `references/access-management.md`: AccessManager, role-delay, admin handoff, and emergency-role guidance.
-- `references/advanced-protocols.md`: signatures, oracles, account abstraction, bridges, L2s, and governance operations.
+- `references/advanced-protocols.md`: compatibility index for the focused v2 references.
+- `references/signatures.md`: typed data, permits, contract wallets, delegation, and replay.
+- `references/oracle-safety.md`: normalization, freshness, confidence, sequencers, and fallback policy.
+- `references/cross-chain-l2.md`: messaging, finality, replay, retries, and bridge trust.
+- `references/modern-evm.md`: compiler targets, transient and namespaced storage, and delegated EOAs.
+- `references/reproducible-builds.md`: compiler pins, locks, bytecode comparison, and verification.
+- `references/protocol-operations.md`: roles, Safe batches, monitoring, incidents, and recovery.
+- `references/mev-market-mechanics.md`: ordering, slippage, auctions, solvers, and liquidation races.
 - `references/mainnet-readiness.md`: review, audit, deployment, and operational readiness checks.

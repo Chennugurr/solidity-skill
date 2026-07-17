@@ -34,6 +34,11 @@ Load shared references as needed:
 - `../../shared/references/mainnet-readiness.md` for deployment readiness.
 - `../../shared/references/advanced-protocols.md` for permit, vesting governance, L2 launch, and cross-chain launch assumptions.
 
+- `../../shared/references/signatures.md` for permit, nonce, signer, and replay assumptions.
+- `../../shared/references/cross-chain-l2.md` for L2 and cross-domain distribution assumptions.
+- `../../shared/references/protocol-operations.md` for role handoff, Safe batches, dry-runs, and incident controls.
+- `../../shared/references/mev-market-mechanics.md` for liquidity, ordering, slippage, and auction risk.
+
 Load local references as needed:
 
 - `references/launch-mechanics.md` for token and launch design.

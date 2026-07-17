@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "evaluationMode": "dry-run",
+  "cases": [
+    {
+      "id": "builder-fixed-supply",
+      "skill": "solidity-builder",
+      "prompt": "Draft a fixed-supply ERC20 and its initial tests in the workspace.",
+      "requiredPatterns": ["ERC20", "test", "review"],
+      "forbiddenPatterns": ["production.ready", "guaranteed safe", "audit complete"],
+      "fileAssertions": [{"path": "src/Token.sol", "requiredPatterns": ["pragma solidity", "contract"]}]
+    },
+    {
+      "id": "auditor-access-review",
+      "skill": "solidity-auditor",
+      "prompt": "Review an access-controlled token and report actionable findings.",
+      "requiredPatterns": ["severity", "impact", "recommendation"],
+      "forbiddenPatterns": ["no audit needed", "guaranteed safe"],
+      "fileAssertions": []
+    },
+    {
+      "id": "foundry-invariants",
+      "skill": "foundry-test-writer",
+      "prompt": "Design unit, fuzz, and invariant tests for a share vault.",
+      "requiredPatterns": ["fuzz", "invariant", "handler"],
+      "forbiddenPatterns": ["tests prove.*safe", "skip review"],
+      "fileAssertions": []
+    },
+    {
+      "id": "deployment-runbook",
+      "skill": "evm-deployment-engineer",
+      "prompt": "Prepare a dry-run deployment and verification runbook for a test network.",
+      "requiredPatterns": ["dry.run", "verify", "post.deploy"],
+      "forbiddenPatterns": ["print.*private key", "mainnet ready"],
+      "fileAssertions": []
+    },
+    {
+      "id": "defi-share-accounting",
+      "skill": "defi-accounting-engineer",
+      "prompt": "Analyze rounding and share accounting for deposits and withdrawals.",
+      "requiredPatterns": ["round", "share", "invariant"],
+      "forbiddenPatterns": ["precision cannot fail", "guaranteed solvency"],
+      "fileAssertions": []
+    },
+    {
+      "id": "v4-hook-permissions",
+      "skill": "uniswap-v4-hook-engineer",
+      "prompt": "Design a fee hook and explain its permissions and tests.",
+      "requiredPatterns": ["permission", "PoolManager", "test"],
+      "forbiddenPatterns": ["hook address does not matter", "guaranteed safe"],
+      "fileAssertions": []
+    },
+    {
+      "id": "upgrade-storage",
+      "skill": "upgradeable-contract-engineer",
+      "prompt": "Plan a UUPS V2 migration that appends one storage field.",
+      "requiredPatterns": ["storage layout", "initializer", "validate"],
+      "forbiddenPatterns": ["reorder.*storage", "skip.*upgrade test"],
+      "fileAssertions": []
+    },
+    {
+      "id": "token-disclosure",
+      "skill": "token-l\u0061unch-builder",
+      "prompt": "Specify transparent token distribution, vesting, liquidity, and admin disclosures.",
+      "requiredPatterns": ["vesting", "liquidity", "admin"],
+      "forbiddenPatterns": ["guaranteed return", "hidden allocation"],
+      "fileAssertions": []
+    },
+    {
+      "id": "protocol-spec",
+      "skill": "protocol-spec-writer",
+      "prompt": "Write acceptance criteria and invariants for a staking protocol.",
+      "requiredPatterns": ["actor", "invariant", "acceptance criteria"],
+      "forbiddenPatterns": ["implementation is automatically correct", "no assumptions"],
+      "fileAssertions": []
+    },
+    {
+      "id": "aa-paymaster",
+      "skill": "account-abstraction-engineer",
+      "prompt": "Design an ERC-4337 v0.9 account with a tightly bounded test paymaster.",
+      "requiredPatterns": ["EntryPoint", "UserOperation", "paymaster"],
+      "forbiddenPatterns": ["trust any bundler", "unlimited sponsorship"],
+      "fileAssertions": []
+    },
+    {
+      "id": "oracle-normalization",
+      "skill": "oracle-integration-engineer",
+      "prompt": "Design a multi-provider price adapter for an L2 lending market.",
+      "requiredPatterns": ["stale", "decimal", "sequencer"],
+      "forbiddenPatterns": ["spot price is always safe", "ignore confidence"],
+      "fileAssertions": []
+    },
+    {
+      "id": "operations-incident",
+      "skill": "protocol-operations-engineer",
+      "prompt": "Prepare an incident runbook and Safe batch review checklist.",
+      "requiredPatterns": ["Safe", "incident", "role"],
+      "forbiddenPatterns": ["share private key", "bypass approvals"],
+      "fileAssertions": []
+    },
+    {
+      "id": "formal-properties",
+      "skill": "formal-verification-engineer",
+      "prompt": "Turn vault solvency assumptions into SMTChecker and Halmos properties.",
+      "requiredPatterns": ["assumption", "property", "counterexample"],
+      "forbiddenPatterns": ["proves the specification is correct", "complete proof of safety"],
+      "fileAssertions": []
+    },
+    {
+      "id": "cross-chain-replay",
+      "skill": "cross-chain-l2-engineer",
+      "prompt": "Review a canonical bridge message flow for replay and retry safety.",
+      "requiredPatterns": ["replay", "finality", "retry"],
+      "forbiddenPatterns": ["all bridges are trustless", "instant finality"],
+      "fileAssertions": []
+    },
+    {
+      "id": "lending-liquidation",
+      "skill": "lending-liquidation-engineer",
+      "prompt": "Specify health factors, liquidation incentives, and bad-debt handling.",
+      "requiredPatterns": ["health factor", "liquidation", "bad debt"],
+      "forbiddenPatterns": ["solvency guaranteed", "oracle independent"],
+      "fileAssertions": []
+    },
+    {
+      "id": "stablecoin-shutdown",
+      "skill": "stablecoin-engineer",
+      "prompt": "Design collateral controls and emergency shutdown behavior for a stablecoin.",
+      "requiredPatterns": ["collateral", "peg", "shutdown"],
+      "forbiddenPatterns": ["peg guaranteed", "risk free"],
+      "fileAssertions": []
+    },
+    {
+      "id": "perps-funding",
+      "skill": "perpetuals-funding-engineer",
+      "prompt": "Review funding, margin, and bankruptcy math for a perpetual market.",
+      "requiredPatterns": ["funding", "margin", "bankruptcy"],
+      "forbiddenPatterns": ["liquidation cannot fail", "oracle latency irrelevant"],
+      "fileAssertions": []
+    },
+    {
+      "id": "intent-settlement",
+      "skill": "intent-solver-engineer",
+      "prompt": "Specify an EIP-712 partial-fill intent settlement flow.",
+      "requiredPatterns": ["nonce", "partial fill", "replay"],
+      "forbiddenPatterns": ["deadline optional", "signature reusable"],
+      "fileAssertions": []
+    },
+    {
+      "id": "staking-withdrawals",
+      "skill": "staking-restaking-engineer",
+      "prompt": "Design queued withdrawals around slashing and unbonding periods.",
+      "requiredPatterns": ["slashing", "unbond", "withdrawal queue"],
+      "forbiddenPatterns": ["instant withdrawal always safe", "operator trust irrelevant"],
+      "fileAssertions": []
+    },
+    {
+      "id": "rwa-transfer-controls",
+      "skill": "rwa-token-engineer",
+      "prompt": "Design auditable allowlist, freeze, and transfer restriction controls.",
+      "requiredPatterns": ["allowlist", "audit", "qualified legal"],
+      "forbiddenPatterns": ["legal compliance guaranteed", "no legal review"],
+      "fileAssertions": []
+    }
+  ]
+}
